@@ -2,4 +2,19 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  page:
+    one: Page
+  project:
+    one: Project
+    other: Projects
+
+  labels:
+    new: New %{o}
+    new_for: New %{o} for %{s}
+
+  successes:
+    created: '%{o} created'
+
+  errors: &errors
+    messages:
+      taken: has already been taken

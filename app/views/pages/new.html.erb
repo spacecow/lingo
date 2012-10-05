@@ -1,0 +1,6 @@
+<%= title new_for(:page, @project.title) %>
+
+<%= simple_form_for [@project,@page] do |f| %>
+  <%= f.input :no, wrapper_html:{id:'no'} %>
+  <%= f.button :submit, class: :submit %>
+<% end %>
