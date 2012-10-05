@@ -17,6 +17,9 @@ describe 'Pages new, layout' do
   it "has the title value set to blank" do
     value('* No').should be_nil
   end
+  it "has the title value set to blank" do
+    value('Image').should be_nil
+  end
 
   it "has a create page button" do
     page.should have_submit_button('Create Page') 
@@ -47,6 +50,21 @@ describe 'Pages new, layout' do
 
       it "shows a flash message" do
         page.should have_notice('Page created')
+      end
+    end
+
+    context "saves image", image:true do
+      before(:each) do
+        attach_file 'Image', 'app/assets/images/devianart.jpg'
+        click_button 'Create Page'
+        @page = Page.last
+      end
+
+      it "as regular" do
+        @page.image_url.should eq "/uploads/project/#{@project.id}/page/image/#{@page.id}/devianart.jpg"
+      end
+      it "as large" do
+        @page.image_url(:large).should eq "/uploads/project/#{@project.id}/page/image/#{@page.id}/large_devianart.jpg"
       end
     end
 

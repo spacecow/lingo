@@ -1,4 +1,9 @@
 class PagesController < ApplicationController
+  def show
+    @project = Project.find(params[:project_id])
+    @page = @project.pages.find(params[:id])
+  end
+
   def new
     @project = Project.find(params[:project_id])
     @page = @project.pages.build

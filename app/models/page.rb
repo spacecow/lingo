@@ -1,5 +1,8 @@
 class Page < ActiveRecord::Base
-  attr_accessible :no, :project_id
+  belongs_to :project
+
+  attr_accessible :no, :image
+  mount_uploader :image, ImageUploader
 
   validates :no, presence:true
 end

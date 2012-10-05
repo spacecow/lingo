@@ -4,6 +4,8 @@ gem 'rails', '3.2.7'
 gem 'mysql2'
 gem 'jquery-rails'
 gem 'simple_form'
+gem 'rmagick'
+gem 'carrierwave'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
