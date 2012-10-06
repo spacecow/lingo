@@ -14,10 +14,10 @@ describe 'Pages new, layout' do
     page.should have_form(:new_page)
   end
 
-  it "has the title value set to blank" do
+  it "has the no value set to blank" do
     value('* No').should be_nil
   end
-  it "has the title value set to blank" do
+  it "has the image value set to blank" do
     value('Image').should be_nil
   end
 

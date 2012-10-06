@@ -1,0 +1,2 @@
+class Japanese < Language
+end

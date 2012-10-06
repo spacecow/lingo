@@ -2,6 +2,9 @@ class PagesController < ApplicationController
   def show
     @project = Project.find(params[:project_id])
     @page = @project.pages.find(params[:id])
+    @translation = Translation.new 
+    @translation.languages << Japanese.new
+    @translation.languages << English.new
   end
 
   def new

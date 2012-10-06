@@ -3,3 +3,14 @@
 <%= subtitle "Page #{@page.no}" %>
 
 <%= image_tag @page.image_url(:large) %>
+
+<%= simple_form_for @translation do |f| %>
+  <%= f.simple_fields_for :languages do |f2| %>
+    <%= render "language_fields", f:f2 %>
+  <% end %>
+  <%= label_tag :page_id %>
+  <%= text_field_tag :page_id, @page.id %>
+  <%= label_tag :project_id %>
+  <%= text_field_tag :project_id, @project.id %>
+  <%= f.button :submit %>
+<% end %>

@@ -1,0 +1,2 @@
+class English < Language
+end
