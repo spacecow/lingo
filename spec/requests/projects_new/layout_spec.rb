@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Projects new, layout' do
   before(:each) do
+    signin
     visit new_project_path
   end
 

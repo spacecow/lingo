@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe 'Pages show, create section' do
   before(:each) do
+    signin
     project = FactoryGirl.create(:project)
     @page = FactoryGirl.create(:page, project_id:project.id)
     visit project_page_path(project, @page)
-    fill_in 'Japanese', with:'nihongo'
-    fill_in 'English', with:'japanese'
+    fill_in 'translation_languages_attributes_0_content', with:'nihongo'
+    fill_in 'translation_languages_attributes_1_content', with:'japanese'
   end
 
   it "saves the translation to db" do

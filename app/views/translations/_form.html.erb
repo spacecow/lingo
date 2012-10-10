@@ -1,0 +1,8 @@
+<%= simple_form_for @translation do |f| %>
+  <%= f.simple_fields_for :languages do |f2| %>
+    <%= render "language_fields", f:f2 %>
+  <% end %>
+  <%= hidden_field_tag :page_id, @page.id %>
+  <%= hidden_field_tag :project_id, @project.id %>
+  <%= f.button :submit, class: :submit %>
+<% end %>

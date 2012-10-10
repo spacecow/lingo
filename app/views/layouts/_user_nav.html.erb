@@ -1,0 +1,7 @@
+<div id="user_nav">
+  <% if current_user %>
+    <%= link_to t(:logout), signout_path %>
+  <% else %>
+    <%= link_to t(:login), '/auth/facebook' %>
+  <% end %>
+</div>

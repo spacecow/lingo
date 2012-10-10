@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Pages new, layout' do
   before(:each) do
+    signin
     @project = FactoryGirl.create(:project,title:'Ashita no Joe')
     visit new_project_page_path(@project)
   end
@@ -10,7 +11,7 @@ describe 'Pages new, layout' do
     page.should have_title('New Page for Ashita no Joe')
   end
 
-  it "has a new project form" do
+  it "has a new page form" do
     page.should have_form(:new_page)
   end
 
@@ -23,6 +24,9 @@ describe 'Pages new, layout' do
 
   it "has a create page button" do
     page.should have_submit_button('Create Page') 
+  end
+  it "has a cancel button" do
+    page.should have_cancel_button
   end
 
   context "create" do
@@ -41,7 +45,7 @@ describe 'Pages new, layout' do
         @page = Page.last
       end
 
-      it "title" do
+      it "no" do
         @page.no.should be 2 
       end
       it "project_id" do
@@ -50,6 +54,9 @@ describe 'Pages new, layout' do
 
       it "shows a flash message" do
         page.should have_notice('Page created')
+      end
+      it "redirects to the project page" do
+        current_path.should eq project_path(@project)
       end
     end
 
@@ -73,6 +80,13 @@ describe 'Pages new, layout' do
         fill_in 'No', with:''
         click_button 'Create Page'
         div(:no).should have_blank_error  
+      end
+    end
+
+    context "cancel" do
+      it "directs back to the project page" do
+        click_button 'Cancel'
+        current_path.should eq project_path(@project)
       end
     end
   end

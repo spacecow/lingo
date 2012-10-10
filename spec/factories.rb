@@ -6,4 +6,10 @@ FactoryGirl.define do
   factory :project do
     title 'Factory title'
   end
+
+  factory :translation do
+  end
+
+  factory :user do
+  end
 end

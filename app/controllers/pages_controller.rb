@@ -1,10 +1,13 @@
 class PagesController < ApplicationController
+  load_and_authorize_resource
+
   def show
     @project = Project.find(params[:project_id])
     @page = @project.pages.find(params[:id])
     @translation = Translation.new 
     @translation.languages << Japanese.new
     @translation.languages << English.new
+    @awesome = 500
   end
 
   def new
@@ -19,6 +22,17 @@ class PagesController < ApplicationController
       redirect_to @project, notice:created(:page)
     else
       render :new
+    end
+  end
+
+  def edit
+    @project = Project.find(params[:project_id])
+  end
+
+  def update
+    @project = Project.find(params[:project_id])
+    if @page.update_attributes(params[:page])
+      redirect_to [@project,@page], notice:updated(:page)
     end
   end
 end

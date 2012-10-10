@@ -1,0 +1,44 @@
+@import "compass/css3/box-shadow"
+
+div.clear
+  clear: both
+  height: 0
+  overflow: hidden
+
+textarea
+  @include box-shadow(rgba(green, 0.4) 0 0 10px, rgba(green, 0.1) 0 0 3px 1px inset)
+
+@mixin translation
+  border: 1px solid gray
+  float: left
+  width: 301px
+  background: #eee
+  color: #666
+  height: 60px
+  margin-right: 10px
+  margin-left: 1px
+
+div#page
+  div#image_container
+    float: left
+  div#translations_container
+    float: left
+    div#translations
+      div.translation
+        div#english
+          +translation
+        div#japanese
+          +translation
+    form
+      margin-top: 10px
+      textarea
+        float: left
+        margin-right: 8px 
+        padding: 0
+        width: 300px
+        height: 60px
+      input.submit
+        margin-top: 10px
+
+div#bottom_links
+  margin-top: 10px

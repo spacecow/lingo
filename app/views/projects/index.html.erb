@@ -1,1 +1,9 @@
-<%= title pl(:project) %>
+<% present Project do |presenter| %>
+  <%= title pl(:project) %>
+
+  <%= render 'projects/projects', projects:@projects if @projects.present? %>
+
+  <div id="bottom_links">
+    <%= presenter.new_link %>
+  </div>
+<% end %>

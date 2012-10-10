@@ -1,0 +1,2 @@
+class ProjectPresenter < BasePresenter
+end

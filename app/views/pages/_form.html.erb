@@ -1,0 +1,9 @@
+<%= simple_form_for [@project,@page] do |f| %>
+  <%= f.input :no, wrapper_html:{id:'no'} %>
+  <%= f.input :image %>
+  <%= f.button :submit, class: :submit %>
+<% end %>
+
+<%= form_tag project_path(@project), :method => :get do %>
+  <%= submit_tag t('helpers.submit.cancel'), :class => :cancel %>
+<% end %>

@@ -1,16 +1,21 @@
-<%= title @project.title %>
+<div id="page">
+  <%= title @project.title %>
 
-<%= subtitle "Page #{@page.no}" %>
+  <%= subtitle "Page #{@page.no}" %>
 
-<%= image_tag @page.image_url(:large) %>
+  <div id="image_container">
+    <%= image_tag @page.image_url(:large), id:'rectangle', data:{x2:'500',y2:'500'} %>
+  </div>
 
-<%= simple_form_for @translation do |f| %>
-  <%= f.simple_fields_for :languages do |f2| %>
-    <%= render "language_fields", f:f2 %>
-  <% end %>
-  <%= label_tag :page_id %>
-  <%= text_field_tag :page_id, @page.id %>
-  <%= label_tag :project_id %>
-  <%= text_field_tag :project_id, @project.id %>
-  <%= f.button :submit %>
-<% end %>
+  <div id="translations_container">
+    <%= render "translations/translations", translations:@page.translations if @page.translations.present? %>
+
+    <%= render "translations/form" if can? :new, Translation %>
+
+    <% present [@page,@project] do |presenter| %>
+      <div id="bottom_links">
+        <%= presenter.edit_link %>
+      </div>
+    <% end %>
+  </div>
+</div>

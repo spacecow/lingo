@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  load_and_authorize_resource
+
   def show
   end
 
@@ -6,11 +8,9 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new
   end
 
   def create
-    @project = Project.new(params[:project])
     if @project.save 
       redirect_to projects_path, notice:created(:project)
     else

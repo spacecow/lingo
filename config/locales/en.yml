@@ -2,18 +2,29 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  login: Login
   page:
     one: Page
   project:
     one: Project
     other: Projects
 
+  helpers:
+    submit:
+      cancel: Cancel
+
   labels:
+    edit_for: Edit %{o} for %{s}
     new: New %{o}
     new_for: New %{o} for %{s}
 
+  notices:
+    logged_in: Logged in.
+    logged_out: Logged out.
+
   successes:
     created: '%{o} created'
+    updated: '%{o} updated'
 
   errors: &errors
     messages:

@@ -1,0 +1,2 @@
+class PagePresenter < BasePresenter
+end
