@@ -5,31 +5,12 @@ div.clear
   height: 0
   overflow: hidden
 
-textarea
-  @include box-shadow(rgba(green, 0.4) 0 0 10px, rgba(green, 0.1) 0 0 3px 1px inset)
-
-@mixin translation
-  border: 1px solid gray
-  width: 301px
-  background: #eee
-  color: #666
-  height: 60px
-
 div#page
   div#image_container
     float: left
   div#translations_container
     float: left
     width: 640px
-    div#translations
-      padding: 10px
-      div.translation_pair
-        div#translation
-          +translation
-          float: right
-        div#original
-          +translation
-          float: left
     form
       width: 640px
       padding: 10px
@@ -40,6 +21,8 @@ div#page
         padding: 0
         width: 300px
         height: 60px
+        &.active
+          @include box-shadow(rgba(green, 0.4) 0 0 10px, rgba(green, 0.1) 0 0 3px 1px inset)
       input.submit
         margin-top: 10px
 

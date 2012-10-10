@@ -3,6 +3,14 @@ require 'capybara'
 module Capybara
   module Node
     class Element < Base
+      def tags(tag,cl)
+        all(:css, "#{tag}.#{cl}")
+      end
+      def divs(cl) tags(:div,cl) end
+      def forms(cl) tags(:form,cl) end
+      def divs_no(s); divs(s).count end
+      def forms_no(s); forms(s).count end
+
       def div(s,i=-1)
         if i<0
           find(:css,"div##{s}") 
@@ -10,8 +18,6 @@ module Capybara
           all(:css,"div.#{s}")[i]
         end
       end
-      def divs(s); all(:css, "div.#{s}") end
-      def divs_no(s); divs(s).count end
       def divs_text(s)
         divs(s).map{|e| e.text.strip}.join(', ')
       end

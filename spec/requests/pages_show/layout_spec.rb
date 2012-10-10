@@ -27,6 +27,26 @@ describe 'Pages show, layout' do
         page.should_not have_form(:new_translation)
       end
     end
+
+    context "with translations", focus:true do
+      before(:each) do 
+        create_translation(@page.id,'mahou','magic')
+        visit project_page_path(@project, @page)
+      end
+
+      it "has a translations section" do
+        page.should have_div(:translations)
+      end
+      it "has a form for each translation" do
+        div(:translations).forms_no(:edit_translation).should be 1
+      end
+      #it "shows the japanese translation" do
+      #  div(:translation_pair,0).div(:original).should have_content('mahou')
+      #end
+      #it "shows the english translation" do
+      #  div(:translation_pair,0).div(:translation).should have_content('magic')
+      #end
+    end
   end
 
   context "logged in as member" do
@@ -79,23 +99,4 @@ describe 'Pages show, layout' do
     end
   end
 
-  context "with translations" do
-    before(:each) do 
-      create_translation(@page.id,'magic','mahou')
-      visit project_page_path(@project, @page)
-    end
-
-    it "has a translations section" do
-      page.should have_div(:translations)
-    end
-    it "has a div for each translation" do
-      div(:translations).divs_no(:translation).should be 1
-    end
-    it "shows the english translation" do
-      div(:translation,0).div(:english).should have_content('magic')
-    end
-    it "shows the japanese translation" do
-      div(:translation,0).div(:japanese).should have_content('mahou')
-    end
-  end
 end

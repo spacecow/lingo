@@ -1,2 +1,2 @@
-<%= f.input :content, label:f.object.type, as: :text, label:false, placeholder:'hej' %>
+<%= f.input :content, label:f.object.type, as: :text, label:false, placeholder:'hej', input_html:f.object.input_html(active) %>
 <%= f.input :type, as: :hidden %>

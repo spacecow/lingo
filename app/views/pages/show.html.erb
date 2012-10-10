@@ -8,9 +8,9 @@
   </div>
 
   <div id="translations_container">
-    <%= render "translations/translations", translations:@page.translations if @page.translations.present? %>
+    <%= render "translations/translations", project:@project, page:@page, translations:@page.translations if @page.translations.present? %>
 
-    <%= render "translations/form" if can? :new, Translation %>
+    <%= render "translations/form", project:@project, page:@page, translation:@translation, active:true if can? :new, Translation %>
 
     <% present [@page,@project] do |presenter| %>
       <div id="bottom_links">
