@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(:version => 20121009030507) do
 
   create_table "translations", :force => true do |t|
     t.integer  "page_id"
+    t.integer  "x1"
+    t.integer  "y1"
+    t.integer  "x2"
+    t.integer  "y2"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

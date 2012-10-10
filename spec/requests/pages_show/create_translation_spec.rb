@@ -19,7 +19,7 @@ describe 'Pages show, create section' do
     end.should change(Language,:count).by(2)
   end
 
-  context "saves" do
+  context "saves", focus:true do
     before(:each) do
       click_button 'Create Translation'
       @translation = Translation.last
@@ -29,6 +29,18 @@ describe 'Pages show, create section' do
 
     it "parent page for translation" do
       @translation.page.should eq @page
+    end
+    it "x1 for translation" do
+      @translation.x1.should eq 100 
+    end
+    it "y1 for translation" do
+      @translation.y1.should eq 100 
+    end
+    it "x2 for translation" do
+      @translation.x2.should eq 400 
+    end
+    it "y2 for translation" do
+      @translation.y2.should eq 400 
     end
     it "content japanese" do
       @japanese.content.should eq 'nihongo'

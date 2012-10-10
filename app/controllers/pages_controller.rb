@@ -4,10 +4,9 @@ class PagesController < ApplicationController
   def show
     @project = Project.find(params[:project_id])
     @page = @project.pages.find(params[:id])
-    @translation = Translation.new 
+    @translation = Translation.new(x1:100, y1:100, x2:400, y2:400)
     @translation.languages << Japanese.new
     @translation.languages << English.new
-    @awesome = 500
   end
 
   def new

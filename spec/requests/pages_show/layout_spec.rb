@@ -60,6 +60,18 @@ describe 'Pages show, layout' do
       it "has the english value set to nil" do
         value(:translation_languages_attributes_0_content).should be_empty
       end
+      #it "has x1 set to 100" do
+      #  value(:translation_x1).should eq '100'
+      #end
+      #it "has y1 set to 100" do
+      #  value(:translation_y1).should eq '100'
+      #end
+      #it "has x2 set to 400" do
+      #  value(:translation_x2).should eq '400'
+      #end
+      #it "has y2 set to 400" do
+      #  value(:translation_y2).should eq '400'
+      #end
       
       it "has a create translation button" do
         form(:new_translation).should have_submit_button 'Create Translation'

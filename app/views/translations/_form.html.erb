@@ -2,6 +2,10 @@
   <%= f.simple_fields_for :languages do |f2| %>
     <%= render "language_fields", f:f2 %>
   <% end %>
+  <%= f.input :x1, as: :hidden %>
+  <%= f.input :y1, as: :hidden %>
+  <%= f.input :x2, as: :hidden %>
+  <%= f.input :y2, as: :hidden %>
   <%= hidden_field_tag :page_id, @page.id %>
   <%= hidden_field_tag :project_id, @project.id %>
   <%= f.button :submit, class: :submit %>
