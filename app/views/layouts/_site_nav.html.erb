@@ -1,0 +1,7 @@
+<div id="site_nav">
+  <% if page.nil? %>
+    <%= link_to pl(:project), projects_path %>
+  <% else %>
+    <%= link_to pl(:project), projects_path %> > <%= link_to project.title, project_path(project) %>
+  <% end %>
+</div>

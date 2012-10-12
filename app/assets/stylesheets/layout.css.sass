@@ -1,11 +1,56 @@
 @import "compass/css3/box-shadow"
 
+$blue: #4B7399
+
 div.clear
   clear: both
   height: 0
   overflow: hidden
 
+body
+  font: normal 14px "Helvetica Neue", Arial, Helvetica, sans-serif
+a
+  text-decoration: none 
+  color: $blue
+  text-shadow: 1px 1px 1px #aaa
+  &:hover
+    color: #eee
+    text-shadow: 1px 1px 1px $blue 
+
+div#background
+  background: black
+
+div#main_container
+  padding: 20px
+  background: white
+  width: 1440px
+  margin-left: auto 
+  margin-right: auto 
+  height: 1300px
+
+div#pages
+  margin-bottom: 10px
+  div.thumb
+    float: left
+    width: 90px
+    height: 90px
+    img
+      display: block
+      margin: 0 auto
+    div#no
+      text-align: center
+
 div#page
+  div#title
+    margin-bottom: 10px
+    h1
+      margin-bottom: 0
+    h3, a.edit_link
+      display: table-cell
+      vertical-align: bottom
+    a.edit_link
+      padding-left: 10px
+  
   div#image_container
     float: left
   div#translations_container
@@ -14,7 +59,6 @@ div#page
     form
       width: 640px
       padding: 10px
-      margin-top: 10px
       textarea
         float: left
         margin-right: 8px 
@@ -25,9 +69,11 @@ div#page
         textarea
           @include box-shadow(rgba(green, 0.4) 0 0 10px, rgba(green, 0.1) 0 0 3px 1px inset)
       input.submit
-        margin-top: 10px
+        margin-top: 5px
+      div.button_placeholder
+        height: 30px
   a#new_link
     display: none
 
 div#bottom_links
-  margin-top: 10px
+  padding: 10px

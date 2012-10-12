@@ -2,9 +2,11 @@
 <% present [@page,@project] do |page_presenter| %>
 
 <div id="page">
-  <%= title @project.title %>
-
-  <%= subtitle "Page #{@page.no}" %>
+  <div id="title">
+    <%= title @project.title %>
+    <%= subtitle "Page #{@page.no}" %>
+    <%= page_presenter.edit_link %>
+  </div>
 
   <div id="image_container">
     <%= image_tag @page.image_url(:large), id:'rectangle', data:{x2:'500',y2:'500'} %>
@@ -16,7 +18,6 @@
 
     <div id="bottom_links">
       <%= translation_presenter.new_java_link %>
-      <%= page_presenter.edit_link %>
     </div>
   </div>
 

@@ -28,7 +28,7 @@ describe 'Pages show, layout' do
       end
 
       it "has no edit link" do
-        bottom_links.should_not have_link 'Edit'
+        div(:title).should_not have_link 'Edit'
       end
       it "has no new translation link" do
         bottom_links.should_not have_link 'New Translation'
@@ -73,11 +73,11 @@ describe 'Pages show, layout' do
       end
 
       it "has an edit link" do
-        bottom_links.should have_link 'Edit'
+        div(:title).should have_link 'Edit'
       end
       context "follow edit link" do
         before(:each) do
-          bottom_links.click_link 'Edit'
+          div(:title).click_link 'Edit'
         end
 
         it "directs to the edit page page" do

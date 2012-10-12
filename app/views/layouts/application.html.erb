@@ -8,11 +8,14 @@
 </head>
 <body>
 
-<div id="main_container">
-  <%= render 'layouts/flash', flash:flash %>
-  <%= render 'layouts/user_nav' %>
-  <div id="main">
-    <%= yield %>
+<div id="background">
+  <div id="main_container">
+    <%= render 'layouts/flash', flash:flash %>
+    <%= render 'layouts/site_nav', project:@project, page:@page %>
+    <%= render 'layouts/user_nav' %>
+    <div id="main">
+      <%= yield %>
+    </div>
   </div>
 </div>
 

@@ -13,7 +13,6 @@ $(function(){
   $(img).Jcrop({
     onChange: update_rect,
     onSelect: update_rect,
-    //setSelect: [x1||100, y1||100, x2||200, y2||200],
   }, function(){
     jcrop_api = this;
   });
@@ -40,9 +39,11 @@ $(function(){
   $('form.translation').delegate('textarea', 'click', function(){
     $('form.translation').removeClass('active');
     $('form.translation input.submit').hide();
+    $('form.translation div.button_placeholder').show();
 
     var form_id = $(this).parent().parent().get(0).id;
     $("form#"+form_id+" input.submit").show();
+    $("form#"+form_id+" div.button_placeholder").hide();
     $("form#"+form_id).addClass("active");
     move_rect($(this).parent().parent().get(0),true);
     jcrop_api.setOptions({ allowMove:true, allowResize:true });

@@ -1,9 +1,11 @@
+<% present [Page,@project] do |presenter| %>
+
 <%= title @project.title %>
 
 <%= render 'pages/pages', project:@project, pages:@project.pages if @project.pages.present? %>
 
-<% present [Page,@project] do |presenter| %>
-  <div id="bottom_links">
-    <%= presenter.new_link %>
-  </div>
+<div id="bottom_links">
+  <%= presenter.new_link %>
+</div>
+
 <% end %>
