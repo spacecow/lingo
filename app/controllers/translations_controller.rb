@@ -1,16 +1,25 @@
 class TranslationsController < ApplicationController
-  def show
-    @project = Project.find(params[:project_id])
-    @page = Page.find(params[:page_id])
-    @translation = Translation.find(params[:id])
+  #authorize_resource, only: :new
+  load_and_authorize_resource :project, only:[:create,:update]
+  load_and_authorize_resource :page, through: :project, only:[:create,:update]
+  load_and_authorize_resource :translation, through: :page, only:[:create,:update]
+
+  def new
   end
 
   def create
-    project = Project.find(params[:project_id])
-    page = Page.find(params[:page_id])
-    translation = page.translations.build(params[:translation])
-    if translation.save
-      redirect_to [project, page]
+    if @translation.save
+      redirect_to [@project,@page], notice:created(:translation)
+    else
+      #error
+    end
+  end
+
+  def update
+    if @translation.update_attributes(params[:translation])
+      redirect_to [@project,@page], notice:updated(:translation)
+    else
+      #error
     end
   end
 end

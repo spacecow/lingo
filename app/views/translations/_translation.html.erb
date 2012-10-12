@@ -1,13 +1,1 @@
-<%= render 'translations/form', project:project, page:page, translation:translation, active:active %>
-
-<% if false %>
-<div class="translation_pair" id="translation_<%= translation.id %>" data-x1="<%= translation.x1 %>" data-y1="<%= translation.y1 %>" data-x2="<%= translation.x2 %>" data-y2="<%= translation.y2 %>">
-  <div id="original">
-    <%= translation.japanese %>
-  </div>
-  <div id="translation">
-    <%= translation.english %>
-  </div>
-  <div class="clear"></div>
-</div>
-<% end %>
+<%= presenter.form(:show,false) %>

@@ -1,2 +1,6 @@
-<%= f.input :content, label:f.object.type, as: :text, label:false, placeholder:'hej', input_html:f.object.input_html(active) %>
+<% if f.object.type == 'Japanese' %>
+  <%= f.input :content, as: :text, label:false, placeholder:'Transcribe a section' %>
+<% else %>
+  <%= f.input :content, as: :text, label:false, placeholder:'Enter a translation' %>
+<% end %>
 <%= f.input :type, as: :hidden %>

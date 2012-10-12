@@ -1,26 +1,27 @@
 require 'spec_helper'
 
-describe 'Pages show, create translation' do
+describe 'Pages show, update translation' do
   before(:each) do
     @page = FactoryGirl.create(:page)
+    create_translation(@page.id,'mahou','magic')
     signin
     visit project_page_path(@page.project, @page)
     fill_in 'translation_languages_attributes_0_content', with:'nihongo'
     fill_in 'translation_languages_attributes_1_content', with:'japanese'
   end
 
-  it "saves the translation to db" do
-    lambda do click_button 'Create Translation'
-    end.should change(Translation,:count).by(1)
+  it "adds no translations to db" do
+    lambda{ click_button 'Update Translation'
+    }.should change(Translation,:count).by(0)
   end
-  it "saves the languages to db" do
-    lambda do click_button 'Create Translation'
-    end.should change(Language,:count).by(2)
+  it "adds no languages to db" do
+    lambda{ click_button 'Update Translation'
+    }.should change(Language,:count).by(0)
   end
 
-  context "saves" do
+  context "updates" do
     before(:each) do
-      click_button 'Create Translation'
+      click_button 'Update Translation'
       @translation = Translation.last
       @japanese = @translation.languages.first
       @english = @translation.languages.last
@@ -49,14 +50,10 @@ describe 'Pages show, create translation' do
     end
 
     it "shows a flash message about the update" do
-      page.should have_notice('Translation created')
+      page.should have_notice('Translation updated')
     end
     it "redirects back to the page" do
       current_path.should eq project_page_path(@page.project,@page)
     end
-
-    context "error" do
-      it "both languages cannot be left blank"
-    end #error
-  end #saves
+  end #updates
 end

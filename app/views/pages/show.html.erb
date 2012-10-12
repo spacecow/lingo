@@ -1,3 +1,6 @@
+<% present [@translation,@page,@project] do |translation_presenter| %>
+<% present [@page,@project] do |page_presenter| %>
+
 <div id="page">
   <%= title @project.title %>
 
@@ -8,16 +11,17 @@
   </div>
 
   <div id="translations_container">
-    <%= render "translations/translations", project:@project, page:@page, translations:@page.translations if @page.translations.present? %>
+    <%= translation_presenter.translations %>
+    <%= translation_presenter.form(:new) %>
 
-    <%= render "translations/form", project:@project, page:@page, translation:@translation, active:true if can? :new, Translation %>
-
-    <% present [@page,@project] do |presenter| %>
-      <div id="bottom_links">
-        <%= presenter.edit_link %>
-      </div>
-    <% end %>
+    <div id="bottom_links">
+      <%= translation_presenter.new_java_link %>
+      <%= page_presenter.edit_link %>
+    </div>
   </div>
 
   <div class="clear"></div>
 </div>
+
+<% end %>
+<% end %>

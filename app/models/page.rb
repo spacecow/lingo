@@ -6,4 +6,5 @@ class Page < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   validates :no, presence:true
+  validates :project, presence:true
 end

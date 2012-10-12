@@ -3,3 +3,5 @@ bc8b5e: !ruby/object:Dooby::Task
   todo: rectangle coordinates for translation :done
 20b541: !ruby/object:Dooby::Task 
   todo: some java and layout things for page :done
+1f3f5e: !ruby/object:Dooby::Task 
+  todo: update translation :done

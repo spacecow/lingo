@@ -1,12 +1,13 @@
-<%= simple_form_for translation do |f| %>
+<%= simple_form_for translation, html:{class:translation.klass(active)} do |f| %>
   <%= f.simple_fields_for :languages do |f2| %>
-    <%= render "pages/language_fields", f:f2, active:active %>
+    <%= render "languages/fields", f:f2 %>
   <% end %>
-  <%= f.input :x1, as: :hidden %>
-  <%= f.input :y1, as: :hidden %>
-  <%= f.input :x2, as: :hidden %>
-  <%= f.input :y2, as: :hidden %>
+  <div class="clear"></div>
+  <%= f.input :x1 %>
+  <%= f.input :y1 %>
+  <%= f.input :x2 %>
+  <%= f.input :y2 %>
   <%= hidden_field_tag :page_id, page.id %>
   <%= hidden_field_tag :project_id, project.id %>
-  <%= f.button :submit, class: :submit if active %>
+  <%= f.button :submit, class: :submit %>
 <% end %>

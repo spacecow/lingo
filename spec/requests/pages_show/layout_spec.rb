@@ -23,12 +23,20 @@ describe 'Pages show, layout' do
         page.should_not have_div(:translations)
       end
 
-      it "has no new section form" do
+      it "has no new translation form" do
         page.should_not have_form(:new_translation)
       end
-    end
 
-    context "with translations", focus:true do
+      it "has no edit link" do
+        bottom_links.should_not have_link 'Edit'
+      end
+      it "has no new translation link" do
+        bottom_links.should_not have_link 'New Translation'
+      end
+
+    end #without translations
+
+    context "with translations" do
       before(:each) do 
         create_translation(@page.id,'mahou','magic')
         visit project_page_path(@project, @page)
@@ -38,7 +46,10 @@ describe 'Pages show, layout' do
         page.should have_div(:translations)
       end
       it "has a form for each translation" do
-        div(:translations).forms_no(:edit_translation).should be 1
+        div(:translations).forms_no(:translation).should be 1
+      end
+      it "the form has no edit button" do
+        form(:edit_translation,0).should_not have_button('Update Translation')
       end
       #it "shows the japanese translation" do
       #  div(:translation_pair,0).div(:original).should have_content('mahou')
@@ -46,8 +57,8 @@ describe 'Pages show, layout' do
       #it "shows the english translation" do
       #  div(:translation_pair,0).div(:translation).should have_content('magic')
       #end
-    end
-  end
+    end #with translations
+  end #not logged in
 
   context "logged in as member" do
     before(:each){ signin }
@@ -55,6 +66,10 @@ describe 'Pages show, layout' do
     context "without translations" do
       before(:each) do 
         visit project_page_path(@project, @page)
+      end
+
+      it "has a new translation link" do
+        bottom_links.should have_link 'New Translation'
       end
 
       it "has an edit link" do
@@ -96,7 +111,18 @@ describe 'Pages show, layout' do
       it "has a create translation button" do
         form(:new_translation).should have_submit_button 'Create Translation'
       end
-    end
-  end
+    end #without translations
+
+    context "with translations" do
+      before(:each) do 
+        create_translation(@page.id,'mahou','magic')
+        visit project_page_path(@project, @page)
+      end
+
+      it "the form has an edit button" do
+        form(:translation,0).should have_button('Update Translation')
+      end
+    end #with translations
+  end #logged in as member
 
 end

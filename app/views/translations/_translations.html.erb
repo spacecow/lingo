@@ -1,4 +1,7 @@
 <div id="translations">
-  <%= render translations, project:project, page:page, active:false %>
+  <% translations.each do |translation| %>
+    <% present [translation,page,project] do |presenter| %>
+      <%= render translation, presenter:presenter %>
+    <% end %>
+  <% end %>
 </div>
-<div class="clear"></div>

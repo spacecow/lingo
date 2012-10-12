@@ -6,7 +6,7 @@ Lingo::Application.routes.draw do
   resources :projects, :only => [:show,:index,:new,:create] do
     resources :pages, :only => [:show,:new,:create,:edit,:update]
   end
-  resources :translations, :only => [:show,:create,:update]
+  resources :translations, :only => [:new,:create,:update]
 
   get 'welcome' => 'projects#index'
   root :to => 'projects#index'

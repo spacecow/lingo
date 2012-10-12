@@ -8,6 +8,10 @@ class Translation < ActiveRecord::Base
   def english; content(languages.select{|e| e.type == 'English'}.first) end
   def japanese; content(languages.select{|e| e.type == 'Japanese'}.first) end
 
+  def klass(active)
+    active ? "active translation" : "translation" 
+  end
+
   private
 
     def content(lang) lang.content end
