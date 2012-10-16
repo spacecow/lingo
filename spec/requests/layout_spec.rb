@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Site Layout, site nav', focus:true do
+describe 'Site Layout, site nav' do
   context 'on the root page' do
     before(:each) do
       visit root_path

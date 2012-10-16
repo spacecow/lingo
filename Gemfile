@@ -23,6 +23,9 @@ group :development do
 end
 
 group :test do
+  gem 'its'
+  gem 'rb-inotify', '~> 0.8.8'
+  gem 'fuubar'
   gem 'spork-rails' #, '> 0.9.0.rc'
   gem 'guard'
   gem 'guard-rspec'

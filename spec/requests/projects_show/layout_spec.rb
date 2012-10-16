@@ -34,7 +34,7 @@ describe 'Projects show, layout' do
         page.should have_div(:pages)
       end
       it "has a div for each page" do
-        div(:pages).divs_no(:page).should be 1
+        div(:pages).divs_no(:thumb).should be 1
       end
     end
   end

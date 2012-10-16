@@ -1,6 +1,23 @@
 require 'spec_helper'
 
 describe 'Pages show, layout' do
+  context "member logged in" do
+    let(:_page){ create(:page) }
+    before{ signin }
+
+    context "with other member's translation" do
+      let(:translation){ create(:translation, page:_page) }
+      before do
+        create(:japanese, translation:translation, content:'nihongo')
+        visit project_page_path(_page.project, _page)
+      end
+
+      it{ false.should be_true }
+    end
+  end #member logged in
+end
+
+describe 'Pages show, layout' do
   before(:each) do
     @project = FactoryGirl.create(:project,title:'Ashita no Joe')
     @page = FactoryGirl.create(:page, project_id:@project.id)
@@ -12,51 +29,36 @@ describe 'Pages show, layout' do
         visit project_page_path(@project, @page)
       end
 
-      it "has a title" do
-        page.should have_title('Ashita no Joe')
-      end
-      it "has a subtitle" do
-        page.should have_subtitle('Page 1')
-      end
-
-      it "has no translations section" do
-        page.should_not have_div(:translations)
-      end
-
-      it "has no new translation form" do
-        page.should_not have_form(:new_translation)
-      end
-
-      it "has no edit link" do
-        div(:title).should_not have_link 'Edit'
-      end
-      it "has no new translation link" do
-        bottom_links.should_not have_link 'New Translation'
-      end
+      it { page.should have_title('Ashita no Joe') }
+      it { page.should have_subtitle('Page 1') }
+      it { page.should_not have_div(:translations) }
+      it { page.should_not have_form(:new_translation) }
+      it { div(:title).should_not have_link 'Edit' }
+      it { bottom_links.should_not have_link 'New Translation' }
 
     end #without translations
 
     context "with translations" do
-      before(:each) do 
-        create_translation(@page.id,'mahou','magic')
-        visit project_page_path(@project, @page)
-      end
+      context "without version" do
+        before(:each) do 
+          create_translation(@page.id,'mahou','magic')
+          visit project_page_path(@project, @page)
+        end
 
-      it "has a translations section" do
-        page.should have_div(:translations)
-      end
-      it "has a form for each translation" do
-        div(:translations).forms_no(:translation).should be 1
-      end
-      it "the form has no edit button" do
-        form(:edit_translation,0).should_not have_button('Update Translation')
-      end
-      #it "shows the japanese translation" do
-      #  div(:translation_pair,0).div(:original).should have_content('mahou')
-      #end
-      #it "shows the english translation" do
-      #  div(:translation_pair,0).div(:translation).should have_content('magic')
-      #end
+        it { page.should have_div(:translations) }
+        it { div(:translations).forms_no(:translation).should be 1 }
+        it { form(:edit_translation,0).should_not have_button('Update Translation') }
+      end #without version (with translations)
+
+      context "with other version" do
+        before(:each) do
+          translation = create_translation(@page.id,'mahou','magic')
+          translation.languages << Japanese.new
+        end
+
+        it "" do
+        end
+      end #with other version (with translations)
     end #with translations
   end #not logged in
 

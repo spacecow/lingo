@@ -8,6 +8,7 @@ describe 'Pages show, create translation' do
     fill_in 'translation_languages_attributes_0_content', with:'nihongo'
     fill_in 'translation_languages_attributes_1_content', with:'japanese'
   end
+  let(:user){ User.last }
 
   it "saves the translation to db" do
     lambda do click_button 'Create Translation'
@@ -19,41 +20,23 @@ describe 'Pages show, create translation' do
   end
 
   context "saves" do
-    before(:each) do
-      click_button 'Create Translation'
-      @translation = Translation.last
-      @japanese = @translation.languages.first
-      @english = @translation.languages.last
-    end
+    before{ click_button 'Create Translation' }
+    let(:translation){ Translation.last }
+    let(:japanese){ translation.languages.first }
+    let(:english){ translation.languages.last }
 
-    it "parent page for translation" do
-      @translation.page.should eq @page
-    end
-    it "content japanese" do
-      @japanese.content.should eq 'nihongo'
-    end
-    it "type japanese" do
-      @japanese.type.should eq 'Japanese'
-    end
-    it "parent translation for japanese" do
-      @japanese.translation.should eq @translation
-    end
-    it "content english" do
-      @english.content.should eq 'japanese'
-    end
-    it "type english" do
-      @english.type.should eq 'English'
-    end
-    it "parent translation for english" do
-      @english.translation.should eq @translation
-    end
+    it{ translation.page.should eq @page }
+    it{ japanese.content.should eq 'nihongo' }
+    it{ japanese.type.should eq 'Japanese' }
+    it{ japanese.translation.should eq translation }
+    it{ japanese.user.should eq user }
+    it{ english.content.should eq 'japanese' }
+    it{ english.type.should eq 'English' }
+    it{ english.translation.should eq translation }
+    it{ english.user.should eq user }
 
-    it "shows a flash message about the update" do
-      page.should have_notice('Translation created')
-    end
-    it "redirects back to the page" do
-      current_path.should eq project_page_path(@page.project,@page)
-    end
+    it{ page.should have_notice('Translation created') }
+    it{ current_path.should eq project_page_path(@page.project,@page) }
 
     context "error" do
       it "both languages cannot be left blank"

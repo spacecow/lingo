@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20121009030507) do
   create_table "languages", :force => true do |t|
     t.string   "content"
     t.integer  "translation_id"
+    t.integer  "user_id"
     t.string   "type"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
