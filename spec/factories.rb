@@ -1,7 +1,5 @@
 FactoryGirl.define do
   factory :language do 
-    user
-
     factory :japanese do
       type 'Japanese'
     end
@@ -17,6 +15,10 @@ FactoryGirl.define do
 
   factory :project do
     title 'Factory title'
+  end
+
+  factory :sentence do
+    user
   end
 
   factory :translation do

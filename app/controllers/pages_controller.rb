@@ -7,7 +7,9 @@ class PagesController < ApplicationController
     @translations = @page.translations
     @translation = Translation.new(x1:100, y1:100, x2:400, y2:400)
     @translation.languages << Japanese.new
+    @translation.languages.last.sentences << Sentence.new
     @translation.languages << English.new
+    @translation.languages.last.sentences << Sentence.new
   end
 
   def new

@@ -1,6 +1,8 @@
-<% if f.object.type == 'Japanese' %>
-  <%= f.input :content, as: :text, label:false, placeholder:'Transcribe a section' %>
-<% else %>
-  <%= f.input :content, as: :text, label:false, placeholder:'Enter a translation' %>
+<%= f.simple_fields_for :popular_sentence do |f2| %>
+  <% if f.object.type == 'Japanese' %>
+    <%= render "sentences/fields", f:f2, placeholder:'Transcribe a section' %>
+  <% else %>
+    <%= render "sentences/fields", f:f2, placeholder:'Enter a translation' %>
+  <% end %>
 <% end %>
-<%# f.input :type, as: :hidden %>
+<%= f.input :type, as: :hidden %>

@@ -1,18 +1,24 @@
 require 'spec_helper'
 
 describe 'Pages show, layout' do
+  let(:_page){ create(:page) }
+
   context "member logged in" do
-    let(:_page){ create(:page) }
     before{ signin }
 
-    context "with other member's translation" do
+    context "with translations" do
       let(:translation){ create(:translation, page:_page) }
-      before do
-        create(:japanese, translation:translation, content:'nihongo')
-        visit project_page_path(_page.project, _page)
-      end
+      let(:japanese){ create(:japanese, translation:translation) }
+      let!(:sentence){ create(:sentence, language:japanese) }
+  
+      context "different translation versions" do
+        before do
+          create(:sentence, language:japanese)
+          visit project_page_path(_page.project, _page)
+        end 
 
-      it{ false.should be_true }
+        it{ page.should_not have_textarea(:translation_languages_attributes_0_sentences_attributes_1_content) }
+      end
     end
   end #member logged in
 end
@@ -92,10 +98,10 @@ describe 'Pages show, layout' do
       end
 
       it "has the japanese value set to nil" do
-        value(:translation_languages_attributes_1_content).should be_empty
+        value(:translation_languages_attributes_1_sentences_attributes_0_content).should be_empty
       end
       it "has the english value set to nil" do
-        value(:translation_languages_attributes_0_content).should be_empty
+        value(:translation_languages_attributes_0_sentences_attributes_0_content).should be_empty
       end
       #it "has x1 set to 100" do
       #  value(:translation_x1).should eq '100'

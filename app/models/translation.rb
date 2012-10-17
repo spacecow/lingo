@@ -5,14 +5,16 @@ class Translation < ActiveRecord::Base
 
   attr_accessible :languages_attributes, :x1, :y1, :x2, :y2
 
-  def english; content(languages.select{|e| e.type == 'English'}.first) end
-  def japanese; content(languages.select{|e| e.type == 'Japanese'}.first) end
+  validates :page_id, presence:true
+
+  def english; languages.select{|e| e.type == 'English'}.first end
+  def japanese; languages.select{|e| e.type == 'Japanese'}.first end
 
   def klass(active)
     active ? "active translation" : "translation" 
   end
 
-  private
-
-    def content(lang) lang.content end
+  def set_initial_user(user)
+    languages.map{|e| e.set_initial_user(user)}
+  end
 end

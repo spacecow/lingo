@@ -1,76 +1,84 @@
 require 'spec_helper'
 
+
 describe 'Pages show, updates translation' do
-  let(:_page){ create(:page) }
-  before do
+  let(:_page){ FactoryGirl.create(:page) }
+  before(:each) do
     signin
     @user = User.last
+    @second_user = create(:user)
     translation = create(:translation, page:_page)
-    create(:japanese, translation:translation, user:@user) 
-    create(:english, translation:translation, user:create(:user)) 
+    japanese = create(:japanese, translation:translation)
+    create(:sentence, user:@user, language:japanese, content:'eigo') 
+    english = create(:english, translation:translation)
+    create(:sentence, user:@second_user, language:english, content:'english') 
     visit project_page_path(_page.project, _page)
-    fill_in 'translation_languages_attributes_0_content', with:'nihongo'
-    fill_in 'translation_languages_attributes_1_content', with:'japanese'
+    fill_in 'translation_languages_attributes_0_sentences_attributes_0_content', with:'nihongo'
+    fill_in 'translation_languages_attributes_1_sentences_attributes_0_content', with:'japanese'
   end
 
-  it "", focus:true do
+  it "saves the translation to db" do
     lambda do click_button 'Update Translation'
     end.should change(Translation,:count).by(0)
-  end 
-
-  #it "adds no translations to db" do
-  #  lambda{ click_button 'Update Translation'
-  #  }.should change(Translation,:count).by(0)
-  #end
-  #it "adds no languages to db" do
-  #  lambda{ click_button 'Update Translation'
-  #  }.should change(Language,:count).by(0)
-  #end
-
-  context "updates own translation" do
-    before{ click_button 'Update Translation' }
-    let(:translation){ Translation.last }
-
-    subject(:japanese){ translation.languages.first }
-    its(:content){ should eq 'nihongo' }
-    its(:type){ should eq 'Japanese' }
-    its(:translation_id){ should eq translation.id }
-    its(:user_id){ should eq @user.id }
+  end
+  it "saves the two languages to db" do
+    lambda do click_button 'Update Translation'
+    end.should change(Language,:count).by(0)
+  end
+  it "saves the two translated sentences to db" do
+    lambda do click_button 'Update Translation'
+    end.should change(Sentence,:count).by(1)
   end
 
-  context "creates translation if none exist for user", focus:true do
+  context 'updated' do
     before{ click_button 'Update Translation' }
-    let(:translation){ Translation.last }
+    let(:_translation){ Translation.last }
 
-    subject(:english){ translation.languages.last }
-    its(:content){ should eq 'japanese' }
-    its(:type){ should eq 'English' }
-    its(:translation_id){ should eq translation.id }
-    its(:user_id){ should eq @user.id }
+    context 'translation' do
+      subject(:translation){ _translation }
+      its(:page_id){ should eq _page.id }
+    end
+
+    context 'japanese' do
+      let(:_japanese){ _translation.japanese }
+      subject(:japanese){ _japanese }
+      its(:type){ should eq 'Japanese' }
+      its(:translation_id){ should eq _translation.id }
+
+      context 'sentence' do
+        subject(:sentence){ _japanese.sentences.first }
+        its(:content){ should eq 'nihongo' }
+        its(:user_id){ should eq @user.id }
+        its(:language_id){ should eq _japanese.id }
+      end
+    end
+
+    context 'old english' do
+      let(:_english){ _translation.english }
+      subject(:english){ _english }
+      its(:type){ should eq 'English' }
+      its(:translation_id){ should eq _translation.id }
+
+      context 'sentence' do
+        subject(:sentence){ _english.sentences.first }
+        its(:content){ should eq 'english' }
+        its(:user_id){ should eq @second_user.id }
+        its(:language_id){ should eq _english.id }
+      end
+    end
+
+    context 'new english' do
+      let(:_english){ _translation.english }
+      subject(:english){ _english }
+      its(:type){ should eq 'English' }
+      its(:translation_id){ should eq _translation.id }
+
+      context 'sentence' do
+        subject(:sentence){ _english.sentences.last }
+        its(:content){ should eq 'japanese' }
+        its(:user_id){ should eq @user.id }
+        its(:language_id){ should eq _english.id }
+      end
+    end
   end
-  #    @translation = Translation.last
-  #    @japanese = @translation.languages.first
-  #    @english = @translation.languages.last
-  #  end
-
-  #  it "parent page for translation" do
-  #    @translation.page.should eq @page
-  #  end
-  #  it "content english" do
-  #    @english.content.should eq 'japanese'
-  #  end
-  #  it "type english" do
-  #    @english.type.should eq 'English'
-  #  end
-  #  it "parent translation for english" do
-  #    @english.translation.should eq @translation
-  #  end
-
-  #  it "shows a flash message about the update" do
-  #    page.should have_notice('Translation updated')
-  #  end
-  #  it "redirects back to the page" do
-  #    current_path.should eq project_page_path(@page.project,@page)
-  #  end
-  #end #updates
 end

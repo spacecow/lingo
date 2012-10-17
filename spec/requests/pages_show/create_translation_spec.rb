@@ -1,12 +1,13 @@
 require 'spec_helper'
 
-describe 'Pages show, create translation' do
+describe 'Pages show, create translation', focus:true do
+  let(:_page){ FactoryGirl.create(:page) }
   before(:each) do
-    @page = FactoryGirl.create(:page)
     signin
-    visit project_page_path(@page.project, @page)
-    fill_in 'translation_languages_attributes_0_content', with:'nihongo'
-    fill_in 'translation_languages_attributes_1_content', with:'japanese'
+    visit project_page_path(_page.project, _page)
+save_and_open_page
+    fill_in 'translation_languages_attributes_0_sentences_attributes_0_content', with:'nihongo'
+    fill_in 'translation_languages_attributes_1_sentences_attributes_0_content', with:'japanese'
   end
   let(:user){ User.last }
 
@@ -14,32 +15,56 @@ describe 'Pages show, create translation' do
     lambda do click_button 'Create Translation'
     end.should change(Translation,:count).by(1)
   end
-  it "saves the languages to db" do
+  it "saves the two languages to db" do
     lambda do click_button 'Create Translation'
     end.should change(Language,:count).by(2)
   end
+  it "saves the two translated sentences to db" do
+    lambda do click_button 'Create Translation'
+    end.should change(Sentence,:count).by(2)
+  end
 
-  context "saves" do
+  context 'saved' do
     before{ click_button 'Create Translation' }
-    let(:translation){ Translation.last }
-    let(:japanese){ translation.languages.first }
-    let(:english){ translation.languages.last }
+    let(:_translation){ Translation.last }
 
-    it{ translation.page.should eq @page }
-    it{ japanese.content.should eq 'nihongo' }
-    it{ japanese.type.should eq 'Japanese' }
-    it{ japanese.translation.should eq translation }
-    it{ japanese.user.should eq user }
-    it{ english.content.should eq 'japanese' }
-    it{ english.type.should eq 'English' }
-    it{ english.translation.should eq translation }
-    it{ english.user.should eq user }
+    context 'translation' do
+      subject(:translation){ _translation }
+      its(:page_id){ should eq _page.id }
+    end
 
-    it{ page.should have_notice('Translation created') }
-    it{ current_path.should eq project_page_path(@page.project,@page) }
+    context 'japanese' do
+      let(:_japanese){ _translation.japanese }
+      subject(:japanese){ _japanese }
+      its(:type){ should eq 'Japanese' }
+      its(:translation_id){ should eq _translation.id }
 
-    context "error" do
-      it "both languages cannot be left blank"
-    end #error
-  end #saves
+      context 'sentence' do
+        subject(:sentence){ _japanese.sentences.first }
+        its(:content){ should eq 'nihongo' }
+        its(:user_id){ should eq user.id }
+        its(:language_id){ should eq _japanese.id }
+      end
+    end
+
+    context 'english' do
+      let(:_english){ _translation.english }
+      subject(:english){ _english }
+      its(:type){ should eq 'English' }
+      its(:translation_id){ should eq _translation.id }
+
+      context 'sentence' do
+        subject(:sentence){ _english.sentences.first }
+        its(:content){ should eq 'japanese' }
+        its(:user_id){ should eq user.id }
+        its(:language_id){ should eq _english.id }
+      end
+    end
+  end
+end
+
+describe 'Pages show, create translation' do
+  context "error" do
+    it "both languages cannot be left blank"
+  end #error
 end
