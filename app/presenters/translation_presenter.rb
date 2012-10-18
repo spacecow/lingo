@@ -6,7 +6,7 @@ class TranslationPresenter < BasePresenter
   end
   
   def form(action,active=true)
-    h.render "translations/form", project:project, page:page, translation:translation, active:false if h.can? action, Translation
+    h.render "translations/form", project:project, page:page, translation:translation, active:active if h.can? action, Translation
   end
   
   def translations(_translations)

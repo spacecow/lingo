@@ -1,0 +1,2 @@
+class EnglishPresenter < LanguagePresenter
+end

@@ -1,13 +1,12 @@
 require 'spec_helper'
 
-describe 'Pages show, create translation', focus:true do
+describe 'Pages show, create translation' do
   let(:_page){ FactoryGirl.create(:page) }
   before(:each) do
     signin
     visit project_page_path(_page.project, _page)
-save_and_open_page
-    fill_in 'translation_languages_attributes_0_sentences_attributes_0_content', with:'nihongo'
-    fill_in 'translation_languages_attributes_1_sentences_attributes_0_content', with:'japanese'
+    fill_in 'translation_languages_attributes_0_popular_sentence_attributes_content', with:'nihongo'
+    fill_in 'translation_languages_attributes_1_popular_sentence_attributes_content', with:'japanese'
   end
   let(:user){ User.last }
 

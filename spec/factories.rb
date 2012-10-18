@@ -6,6 +6,7 @@ FactoryGirl.define do
     factory :english do
       type 'English'
     end
+    translation
   end
 
   factory :page do
@@ -14,14 +15,16 @@ FactoryGirl.define do
   end
 
   factory :project do
-    title 'Factory title'
+    sequence(:title){|n| "Factory title #{n}"}
   end
 
   factory :sentence do
     user
+    association :language, factory: :language, type:'Japanese'
   end
 
   factory :translation do
+    page
   end
 
   factory :user do

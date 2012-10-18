@@ -9,15 +9,28 @@ describe 'Pages show, layout' do
     context "with translations" do
       let(:translation){ create(:translation, page:_page) }
       let(:japanese){ create(:japanese, translation:translation) }
-      let!(:sentence){ create(:sentence, language:japanese) }
+      let(:english){ create(:english, translation:translation) }
+      let!(:jap_sentence){ create(:sentence, language:japanese) }
+      let!(:eng_sentence){ create(:sentence, language:english) }
   
-      context "different translation versions" do
+      context "without history" do
+        before{ visit project_page_path(_page.project, _page) }
+        it "displays history even if nothing is in it" do
+          form.divs_no(:history).should be 2 
+        end
+      end
+
+      context "with history" do
         before do
           create(:sentence, language:japanese)
           visit project_page_path(_page.project, _page)
+        end
+        it "displays them if there are more than 1" do
+          div(:history,0).divs_no(:sentence).should be 2 
+        end
+        it "displays none if there is just one" do
+          div(:history,1).divs_no(:sentence).should be 0 
         end 
-
-        it{ page.should_not have_textarea(:translation_languages_attributes_0_sentences_attributes_1_content) }
       end
     end
   end #member logged in
@@ -98,10 +111,10 @@ describe 'Pages show, layout' do
       end
 
       it "has the japanese value set to nil" do
-        value(:translation_languages_attributes_1_sentences_attributes_0_content).should be_empty
+        value(:translation_languages_attributes_1_popular_sentence_attributes_content).should be_empty
       end
       it "has the english value set to nil" do
-        value(:translation_languages_attributes_0_sentences_attributes_0_content).should be_empty
+        value(:translation_languages_attributes_0_popular_sentence_attributes_content).should be_empty
       end
       #it "has x1 set to 100" do
       #  value(:translation_x1).should eq '100'

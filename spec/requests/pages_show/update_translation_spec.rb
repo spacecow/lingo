@@ -13,8 +13,8 @@ describe 'Pages show, updates translation' do
     english = create(:english, translation:translation)
     create(:sentence, user:@second_user, language:english, content:'english') 
     visit project_page_path(_page.project, _page)
-    fill_in 'translation_languages_attributes_0_sentences_attributes_0_content', with:'nihongo'
-    fill_in 'translation_languages_attributes_1_sentences_attributes_0_content', with:'japanese'
+    fill_in 'translation_languages_attributes_0_popular_sentence_attributes_content', with:'nihongo'
+    fill_in 'translation_languages_attributes_1_popular_sentence_attributes_content', with:'japanese'
   end
 
   it "saves the translation to db" do
