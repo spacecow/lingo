@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'sentences/sentence.html.erb', focus:true do
+describe 'sentences/sentence.html.erb' do
   let(:user){ create(:user, username:'Batman') }
   let(:sentence){ create(:sentence, user:user, content:'bajs', updated_at:1.hour.ago) }
   before do
