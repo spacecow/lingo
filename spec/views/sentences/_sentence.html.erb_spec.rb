@@ -8,14 +8,15 @@ describe 'sentences/sentence.html.erb' do
       @presenter = presenter
     end
   end
-  let(:output){ render "sentences/sentence", presenter:@presenter }
+  let(:output){ render "sentences/sentence", presenter:@presenter, comment:Comment.new }
 
   describe "div.sentence" do
     subject{ Capybara.string(output).find('div.sentence') } 
-    it "" do end
     it{ should have_selector 'div#content', text:'bajs' }
     it{ should have_selector 'div#timestamp', text:'about 1 hour ago' }
     it{ should have_selector 'div#author', text:'by Batman' }
     it{ should have_link 'Batman', href:user_path(user) }
+    it{ should have_selector 'form#new_comment' }
+    it{ should have_button 'Create Comment' }
   end
 end

@@ -2,4 +2,11 @@
   <%= presenter.content %>
   <%= presenter.timestamp %>
   <%= presenter.author %>
+  <%= render 'sentences/comments', presenter:presenter %>
+  <%= simple_form_for [presenter.sentence, comment] do |f| %>
+    <%= f.input :content, label:false %>
+    <div class="clear"></div>
+    <%= f.button :submit %>
+    <div class="clear"></div>
+  <% end %>
 </div>

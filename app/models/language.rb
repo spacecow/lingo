@@ -10,10 +10,8 @@ class Language < ActiveRecord::Base
   validates :translation, presence:true
   #validates :translation_id, uniqueness:{scope:[:type,:user_id]}
 
-  # For nested attributes in form
-  after_initialize do |language|
-  end
-
+  def page; translation.page end
+  def project; translation.project end
   def set_initial_user(user)
     popular_sentence.set_initial_user(user)
     #sentences.map{|e| e.set_initial_user(user)}

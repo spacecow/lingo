@@ -31,7 +31,10 @@ $(function(){
 
   /* Clicking within a textarea in a translation,
   ** inactivates all translations and hide their
-  ** buttons. Thereafter the one that got clicked
+  ** buttons. All history divs are also
+  ** hidden.
+  **
+  ** Thereafter the one that got clicked
   ** is activated and its button is shown. The
   ** rectangle is also forced to move (in case we
   ** are in edit mode). After the first click,
@@ -40,8 +43,12 @@ $(function(){
     $('form.translation').removeClass('active');
     $('form.translation input.submit').hide();
     $('form.translation div.button_placeholder').show();
+    $('div.history').hide();
 
+    var history_id = $(this).data('history');
     var form_id = $(this).parent().parent().get(0).id;
+    $("div#"+history_id).show();
+
     $("form#"+form_id+" input.submit").show();
     $("form#"+form_id+" div.button_placeholder").hide();
     $("form#"+form_id).addClass("active");
@@ -53,6 +60,7 @@ $(function(){
   $('form#new_translation').hide()
   $("input.submit").hide();
   $('div#page a#new_link').show()
+  $('div.history').hide()
 });
 
 function move_rect(obj, move){

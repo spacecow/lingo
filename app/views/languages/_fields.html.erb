@@ -1,7 +1,6 @@
 <% present f.object do |language_presenter| %>
 
 <%= f.simple_fields_for :popular_sentence do |f2| %>
-  <%= language_presenter.history %>
   <%= render "sentences/fields", f:f2, placeholder:f.object.placeholder %>
 <% end %>
 <%= f.input :type, as: :hidden %>

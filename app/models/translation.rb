@@ -13,6 +13,7 @@ class Translation < ActiveRecord::Base
   def klass(active)
     active ? "active translation" : "translation" 
   end
+  def project; page.project end
 
   def set_initial_user(user)
     languages.map{|e| e.set_initial_user(user)}

@@ -8,6 +8,11 @@ Lingo::Application.routes.draw do
   end
   resources :translations, :only => [:new,:create,:update]
 
+  resources :sentence do
+    resources :comments, :only => :create do
+    end
+  end
+
   get 'welcome' => 'projects#index'
   root :to => 'projects#index'
 end

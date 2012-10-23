@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :comment do
+  end
+
   factory :language do 
     factory :japanese do
       type 'Japanese'

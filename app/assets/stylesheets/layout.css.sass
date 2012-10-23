@@ -54,14 +54,33 @@ div#page
     float: left
   div#translations_container
     float: left
+    div#translations
+      div.translation
+        position: relative
+        width: 1000px
+        div.history
+          position: absolute
+          @include box-shadow(rgba(green, 0.4) 0 0 10px, rgba(green, 0.1) 0 0 3px 1px inset)
+          width: 300px
+          padding: 5px
+          left: 550px
+          top: 12px
+          div#timestamp, div#author
+            font-size: 10px
+            float: left
+          div#author
+            margin-left: 3px
+          form#new_comment
+            textarea
+              height: 31px
+            input.button
+              font-size: 10px
     form
-      width: 1000px
+      float: left
+      width: 550px
       padding: 10px
-      div.history
-        min-height: 100px
-        width: 200px
-        float: left
       textarea
+        resize: none
         float: left
         margin-right: 8px 
         padding: 0
@@ -74,6 +93,7 @@ div#page
         margin-top: 5px
       div.button_placeholder
         height: 30px
+
   a#new_link
     display: none
 

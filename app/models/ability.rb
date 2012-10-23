@@ -10,6 +10,8 @@ class Ability
       can :create, Project
       can :show, User
       can [:new,:create,:update], Translation
+      can :show, Sentence
+      can :create, Comment
     end
   end
 end

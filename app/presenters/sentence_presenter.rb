@@ -7,6 +7,12 @@ class SentencePresenter < BasePresenter
     end
   end
 
+  def comments
+    h.content_tag(:div, id:'comments') do
+      h.render sentence.comments
+    end if sentence.comments.present?
+  end
+
   def content
     h.content_tag(:div, id:'content'){ sentence.content }
   end  

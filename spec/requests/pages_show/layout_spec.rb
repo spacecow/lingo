@@ -15,8 +15,8 @@ describe 'Pages show, layout' do
   
       context "without history" do
         before{ visit project_page_path(_page.project, _page) }
-        it "displays history even if nothing is in it" do
-          form.divs_no(:history).should be 2 
+        it "displays no history if nothing is in it" do
+          form.should_not have_selector 'div.history'
         end
       end
 
@@ -25,11 +25,15 @@ describe 'Pages show, layout' do
           create(:sentence, language:japanese)
           visit project_page_path(_page.project, _page)
         end
-        it "displays them if there are more than 1" do
+        it "displays sentences if there are more than 1" do
           div(:history,0).divs_no(:sentence).should be 2 
         end
+        it "displays comments form if there are more than 1" do
+          div(:history,0).forms_no(:new_comment).should be 2 
+        end
         it "displays none if there is just one" do
-          div(:history,1).divs_no(:sentence).should be 0 
+          form.should_not have_selector 'div.history'
+          #div(:history,1).divs_no(:sentence).should be 0 
         end 
       end
     end

@@ -1,5 +1,5 @@
 <% sentences.each do |sentence| %>
   <% present sentence do |presenter| %>
-    <%= render sentence, presenter:presenter %>
+    <%= render sentence, presenter:presenter, comment:Comment.new %>
   <% end %>
 <% end %>
