@@ -69,7 +69,7 @@ describe 'Pages show, layout' do
         end
 
         it { page.should have_div(:translations) }
-        it { div(:translations).forms_no(:translation).should be 1 }
+        it { div(:translations).should have_div(:languages) }
         it { form(:edit_translation,0).should_not have_button('Update Translation') }
       end #without version (with translations)
 

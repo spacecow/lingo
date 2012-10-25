@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe 'comments/comment.html.erb' do
-  let(:comment){ create(:comment, content:'Oh yeah') }
+  let(:user){ create(:user, username:'Batman') }
+  let(:comment){ create(:comment, content:'Oh yeah', updated_at:1.hour.ago, user:user) }
   before{ render comment }
 
   describe "div.comment" do

@@ -9,6 +9,7 @@ describe 'Pages show, create comment' do
     signin
     create(:sentence, language:japanese)
     visit project_page_path(_page.project, _page)
+    fill_in 'comment_content', with:'Just a comment'
   end
 
   it do
@@ -19,6 +20,15 @@ describe 'Pages show, create comment' do
     before{ div(:history,0).click_button 'Create Comment' }
     subject{ Comment.last } 
     its(:commentable_id){ should eq sentence.id }
+    it{ page.should have_notice('Comment created') }
+  end
+
+  context "error" do
+    before do
+      fill_in 'comment_content', with:''
+      div(:history,0).click_button 'Create Comment'
+    end
+    it{ page.should have_alert('Comment cannot be blank') }
   end
   #  it{ current_path.should eq project_page_path(_page.project, _page) }
 end

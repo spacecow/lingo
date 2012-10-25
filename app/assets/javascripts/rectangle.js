@@ -35,7 +35,12 @@ $(function(){
   ** hidden.
   **
   ** Thereafter the one that got clicked
-  ** is activated and its button is shown. The
+  ** is activated and its button is shown.
+  ** The history is also shown, if there is more
+  ** than one version for the transcribe/
+  ** translation.
+  **
+  ** The
   ** rectangle is also forced to move (in case we
   ** are in edit mode). After the first click,
   ** we are in edit mode. */
@@ -47,7 +52,9 @@ $(function(){
 
     var history_id = $(this).data('history');
     var form_id = $(this).parent().parent().get(0).id;
-    $("div#"+history_id).show();
+    if ($("div#"+history_id).children('div.sentence').length > 1){
+      $("div#"+history_id).show();
+    }
 
     $("form#"+form_id+" input.submit").show();
     $("form#"+form_id+" div.button_placeholder").hide();

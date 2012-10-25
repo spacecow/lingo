@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20121022035046) do
     t.text     "content"
     t.integer  "commentable_id"
     t.string   "commentable_type"
+    t.integer  "user_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end

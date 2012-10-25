@@ -11,7 +11,6 @@ class TranslationsController < ApplicationController
     if @translation.save
       redirect_to [@project,@page], notice:created(:translation)
     else
-      p @translation.errors
       #error
     end
   end

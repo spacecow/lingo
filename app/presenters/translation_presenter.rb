@@ -6,10 +6,22 @@ class TranslationPresenter < BasePresenter
   end
   
   def form(action,active=true)
-    h.render "translations/form", project:project, page:page, translation:translation, active:active if h.can? action, Translation
+    h.render "translations/form", project:project, page:page, translation:translation, active:active, presenter:self if h.can? :edit, Translation
   end
-  
-  def translations(_translations)
-    h.render "translations/translations", project:project, page:page, translations:_translations if page.translations.present?
+
+  def languages
+    h.content_tag(:div, id:'languages') do
+      translation.languages.map{|language|
+        h.render 'languages/language', language:language
+      }.join.html_safe
+    end
+  end
+
+  def histories
+    h.content_tag(:div, id:'histories') do
+      translation.languages.map{|language|
+        h.render 'languages/history', language:language
+      }.join.html_safe
+    end
   end
 end

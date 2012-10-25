@@ -59,6 +59,7 @@ div#page
         position: relative
         width: 1000px
         div.history
+          z-index: 10
           position: absolute
           @include box-shadow(rgba(green, 0.4) 0 0 10px, rgba(green, 0.1) 0 0 3px 1px inset)
           width: 300px
@@ -70,7 +71,15 @@ div#page
             float: left
           div#author
             margin-left: 3px
+          div#comments
+            div.comment
+              margin-left: 5px
+              background: #eee
+              padding: 2px
+              div#content
+                font-size: 12px
           form#new_comment
+            padding: 0
             textarea
               height: 31px
             input.button
@@ -96,6 +105,16 @@ div#page
 
   a#new_link
     display: none
+
+div.translation
+  margin-bottom: 10px
+  div.language
+    div.sentence
+      width: 250px
+      float: left
+      padding: 10px
+      margin-right: 10px
+      border: 1px solid black
 
 div#bottom_links
   padding: 10px

@@ -1,4 +1,12 @@
+<% present [translation,translation.page,translation.project] do |presenter| %>
+
 <div class="translation">
-  <%= presenter.form(:show,false) %>
+  <% if can? :edit, Translation %>
+    <%= presenter.form(:show,false) %>
+  <% else %>
+    <%= render 'translations/languages', presenter:presenter %>
+  <% end %>
   <div class="clear"></div>
 </div>
+
+<% end %>

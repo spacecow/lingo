@@ -13,7 +13,7 @@
   </div>
 
   <div id="translations_container">
-    <%= translation_presenter.translations(@translations) %>
+    <%= render 'pages/translations', presenter:page_presenter %>
     <div class="clear"></div>
     <%= translation_presenter.form(:new,false) %>
 

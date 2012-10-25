@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :comment do
+    user
+    content 'Factory content'
   end
 
   factory :language do 

@@ -1,12 +1,16 @@
-<div class="sentence">
-  <%= presenter.content %>
-  <%= presenter.timestamp %>
-  <%= presenter.author %>
-  <%= render 'sentences/comments', presenter:presenter %>
-  <%= simple_form_for [presenter.sentence, comment] do |f| %>
-    <%= f.input :content, label:false %>
-    <div class="clear"></div>
-    <%= f.button :submit %>
-    <div class="clear"></div>
-  <% end %>
-</div>
+<% present sentence do |presenter| %>
+
+<%= presenter.content %>
+<%= presenter.timestamp if can? :update, sentence %>
+<%= presenter.by_author if can? :update, sentence %>
+<div class="clear"></div>
+<%= render 'sentences/comments', presenter:presenter if can? :show, Comment %>
+
+<%= simple_form_for [presenter.sentence, comment] do |f| %>
+  <%= f.input :content, label:false %>
+  <div class="clear"></div>
+  <%= f.button :submit %>
+<% end if can? :create, Comment %>
+<div class="clear"></div>
+
+<% end %>
