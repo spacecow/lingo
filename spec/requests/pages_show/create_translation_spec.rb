@@ -22,6 +22,15 @@ describe 'Pages show, create translation' do
     lambda do click_button 'Create Translation'
     end.should change(Sentence,:count).by(2)
   end
+  it "saves notifications about the sentences to db" do
+    lambda do click_button 'Create Translation'
+    end.should change(Notification,:count).by(2)
+  end
+  it "saves a notificment to other users about the created sentences to db" do
+    create(:user)
+    lambda do click_button 'Create Translation'
+    end.should change(Noticement,:count).by(2)
+  end
 
   context 'saved' do
     before{ click_button 'Create Translation' }
@@ -44,7 +53,7 @@ describe 'Pages show, create translation' do
         its(:user_id){ should eq user.id }
         its(:language_id){ should eq _japanese.id }
       end
-    end
+    end #english
 
     context 'english' do
       let(:_english){ _translation.english }
@@ -58,10 +67,10 @@ describe 'Pages show, create translation' do
         its(:user_id){ should eq user.id }
         its(:language_id){ should eq _english.id }
       end
-    end
+    end #japanese
   end #saved
 
-  context "blank save", focus:true do
+  context "blank save" do
     before do
       fill_in 'translation_languages_attributes_1_popular_sentence_attributes_content', with:''
     end

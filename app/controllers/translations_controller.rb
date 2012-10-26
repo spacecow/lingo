@@ -15,6 +15,7 @@ class TranslationsController < ApplicationController
     arr.each do |id|
       languages_attrs(params).delete(id)
     end
+
     @translation = @page.translations.build(params[:translation]) 
     @translation.set_initial_user(current_user)
     if @translation.save
@@ -54,7 +55,6 @@ class TranslationsController < ApplicationController
   end
 
   private
-
     def languages_attrs(params)
       params[:translation][:languages_attributes]
     end

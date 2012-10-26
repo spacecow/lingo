@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'translations/form.html.erb', focus:true do
+describe 'translations/form.html.erb' do
   let(:translation){ create(:translation) }
   before do
     present [translation, translation.page, translation.project] do |p| @p = p end

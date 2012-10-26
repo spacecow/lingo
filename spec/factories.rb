@@ -14,6 +14,13 @@ FactoryGirl.define do
     translation
   end
 
+  factory :notification do
+    association :notifiable, factory: :sentence
+    association :creator, factory: :user
+    type_mask 1 
+    content 'Factory content'
+  end
+
   factory :page do
     no 1
     project
@@ -25,6 +32,7 @@ FactoryGirl.define do
 
   factory :sentence do
     user
+    content 'Factory content'
     association :language, factory: :language, type:'Japanese'
   end
 

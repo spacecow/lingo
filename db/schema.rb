@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022035046) do
+ActiveRecord::Schema.define(:version => 20121026071825) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -27,6 +27,24 @@ ActiveRecord::Schema.define(:version => 20121022035046) do
     t.string   "type"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "noticements", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "notification_id"
+    t.boolean  "active",          :default => true
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.integer  "creator_id"
+    t.integer  "type_mask"
+    t.string   "content"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "pages", :force => true do |t|

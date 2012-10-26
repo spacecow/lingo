@@ -1,6 +1,7 @@
 class Translation < ActiveRecord::Base
   belongs_to :page
   has_many :languages, dependent: :destroy, inverse_of: :translation
+
   accepts_nested_attributes_for :languages
 
   attr_accessible :languages_attributes, :x1, :y1, :x2, :y2
@@ -15,6 +16,7 @@ class Translation < ActiveRecord::Base
   end
   def project; page.project end
 
+  def sentences; languages.map(&:sentences).flatten end
   def set_initial_user(user)
     languages.map{|e| e.set_initial_user(user)}
   end
