@@ -4,9 +4,9 @@
 <%= presenter.timestamp if can? :update, sentence %>
 <%= presenter.by_author if can? :update, sentence %>
 <div class="clear"></div>
-<%= render 'sentences/comments', presenter:presenter if can? :show, Comment %>
+<%= presenter.comments %>
 
-<%= simple_form_for [presenter.sentence, comment] do |f| %>
+<%= simple_form_for [presenter.sentence, Comment.new] do |f| %>
   <%= f.input :content, label:false %>
   <div class="clear"></div>
   <%= f.button :submit %>

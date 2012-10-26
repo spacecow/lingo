@@ -11,7 +11,7 @@ class Ability
       can :show, User
       can [:new,:create,:update], Translation
       can [:show,:update], Sentence
-      can :create, Comment
+      can [:show,:create], Comment
     end
   end
 end

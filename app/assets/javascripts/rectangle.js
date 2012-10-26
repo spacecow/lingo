@@ -6,6 +6,8 @@ $(function(){
   var y1 = $(img).data('y1');
   var x2 = $(img).data('x2');
   var y2 = $(img).data('y2');
+  var active_textarea_id;
+  var active_form_id;
 
   /* Initially we are in read mode, so the
   ** rectangle is set not to be moved or resized.
@@ -31,36 +33,56 @@ $(function(){
 
   /* Clicking within a textarea in a translation,
   ** inactivates all translations and hide their
-  ** buttons. All history divs are also
-  ** hidden.
+  ** buttons and comment link.
+  ** All history divs are also hidden.
   **
   ** Thereafter the one that got clicked
   ** is activated and its button is shown.
+  **
   ** The history is also shown, if there is more
   ** than one version for the transcribe/
-  ** translation.
+  ** translation. If it's not, the comment link is
+  ** giving the user the opportunity to force
+  ** showing the history section and create a
+  ** comment.
   **
-  ** The
-  ** rectangle is also forced to move (in case we
+  ** The rectangle is also forced to move (in case we
   ** are in edit mode). After the first click,
   ** we are in edit mode. */
   $('form.translation').delegate('textarea', 'click', function(){
-    $('form.translation').removeClass('active');
+    $('form.translation textarea').removeClass('active');
     $('form.translation input.submit').hide();
     $('form.translation div.button_placeholder').show();
     $('div.history').hide();
+    $('a#comment').hide();
+
+    active_textarea_id = $(this).attr('id')
 
     var history_id = $(this).data('history');
-    var form_id = $(this).parent().parent().get(0).id;
-    if ($("div#"+history_id).children('div.sentence').length > 1){
+    active_form_id = $(this).parent().parent().get(0).id;
+    if ($("div#"+history_id+" div#sentences").children('div.sentence').length > 1){
       $("div#"+history_id).show();
+    }else if ($("div#"+history_id+" div#sentences").children('div.sentence').length == 1 && $("div#"+history_id+" div#sentences").children('div.sentence').children('div#comments').length == 1){
+      $("div#"+history_id).show();
+    }else{
+      $("form#"+active_form_id+" a#comment").show();
     }
 
-    $("form#"+form_id+" input.submit").show();
-    $("form#"+form_id+" div.button_placeholder").hide();
-    $("form#"+form_id).addClass("active");
+    $("form#"+active_form_id+" input.submit").show();
+    $("form#"+active_form_id+" div.button_placeholder").hide();
+    $("form#"+active_form_id+" textarea#"+active_textarea_id).addClass("active");
     move_rect($(this).parent().parent().get(0),true);
     jcrop_api.setOptions({ allowMove:true, allowResize:true });
+  });
+
+
+  /* Make a click on the comment link return false
+  ** to make it a javascript event only.
+  */
+  $("a#comment").click(function(){
+    var history_id = $("form#"+active_form_id+" textarea#"+active_textarea_id).data('history')
+    $("div#"+history_id).show();
+    return false;
   });
 
   /* Unobtrusive javacode */
@@ -68,6 +90,7 @@ $(function(){
   $("input.submit").hide();
   $('div#page a#new_link').show()
   $('div.history').hide()
+  $('a#comment').hide()
 });
 
 function move_rect(obj, move){

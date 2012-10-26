@@ -1,4 +1,4 @@
-<%= simple_form_for translation, html:{class:translation.klass(active)} do |f| %>
+<%= simple_form_for presenter.translation, html:{class:presenter.translation.klass(active)} do |f| %>
   <%= f.simple_fields_for :languages do |f2| %>
     <%= render "languages/fields", f:f2 %>
   <% end %>
@@ -7,10 +7,11 @@
   <%= f.input :y1, as: :hidden %>
   <%= f.input :x2, as: :hidden %>
   <%= f.input :y2, as: :hidden %>
-  <%= hidden_field_tag :page_id, page.id %>
-  <%= hidden_field_tag :project_id, project.id %>
+  <%= hidden_field_tag :page_id, presenter.page.id %>
+  <%= hidden_field_tag :project_id, presenter.project.id %>
   <%= f.button :submit, class: :submit %>
+  <%= link_to 'Comment', '', id:'comment' %>
   <div class="button_placeholder"></div>
 <% end %>
 <%#= language_presenter.history %>
-<%= render 'languages/histories', presenter:presenter %>
+<%= presenter.histories %>

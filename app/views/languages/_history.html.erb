@@ -1,8 +1,5 @@
 <% present language do |presenter| %>
 
-<div class="history" id="history_<%= language.id %>">
-  <%#= render 'sentences/sentences', sentences:language.sentences %>
-  <%= presenter.sentences %>
-</div>
+<%= presenter.sentences %>
 
 <% end %>

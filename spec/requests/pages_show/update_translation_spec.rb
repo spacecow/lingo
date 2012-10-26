@@ -80,5 +80,25 @@ describe 'Pages show, updates translation' do
         its(:language_id){ should eq _english.id }
       end
     end
-  end
+  end #updated
+
+  context "blank update" do
+    before do
+      fill_in 'translation_languages_attributes_0_popular_sentence_attributes_content', with:''
+      fill_in 'translation_languages_attributes_1_popular_sentence_attributes_content', with:''
+    end
+
+    it "saves the translation to db" do
+      lambda do click_button 'Update Translation'
+      end.should change(Translation,:count).by(0)
+    end
+    it "saves the two languages to db" do
+      lambda do click_button 'Update Translation'
+      end.should change(Language,:count).by(0)
+    end
+    it "saves the two translated sentences to db" do
+      lambda do click_button 'Update Translation'
+      end.should change(Sentence,:count).by(0)
+    end
+  end #blank update
 end

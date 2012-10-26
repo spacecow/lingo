@@ -28,4 +28,7 @@ RSpec.configure do |config|
   OmniAuth.config.test_mode = true
   pre = {provider:'facebook', uid:"123456", info:{name:'Test Name', nickname:'testuser', email:'test@user.com'}, credentials:{token:'abc123', expires_at:1341979183}}
   OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(pre)
+
+  # --------- Testing presenters ---------
+  config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
 end

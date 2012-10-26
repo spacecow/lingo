@@ -9,6 +9,7 @@ class Sentence < ActiveRecord::Base
   validates :language_id, uniqueness:{scope: :user_id}
   validates :language, presence:true
 
+  def comments_present?; comments.present? end
   def page; language.page end
   def project; language.project end
   def set_initial_user(user) self.user = user end
