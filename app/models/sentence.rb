@@ -10,7 +10,8 @@ class Sentence < ActiveRecord::Base
   validates :language_id, uniqueness:{scope: :user_id}
   validates :language, presence:true
 
-  after_save :create_notification
+  after_create :create_notification
+  after_update :update_notification
 
   def comments_present?; comments.present? end
   def page; language.page end

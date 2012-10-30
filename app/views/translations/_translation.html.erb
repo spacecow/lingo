@@ -1,8 +1,9 @@
 <% present [translation,translation.page,translation.project] do |presenter| %>
 
-<div class="translation">
+<div class="translation" data-x1='<%= translation.x1 %>' data-y1='<%= translation.y1 %>' data-x2='<%= translation.x2 %>' data-y2='<%= translation.y2 %>'>
   <% if can? :edit, Translation %>
     <%= presenter.form(:show,false) %>
+    <%= presenter.histories %>
   <% else %>
     <%= render 'translations/languages', presenter:presenter %>
   <% end %>
