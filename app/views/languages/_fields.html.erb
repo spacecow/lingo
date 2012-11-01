@@ -1,4 +1,4 @@
-<% present f.object do |language_presenter| %>
+<% present f.object do |presenter| %>
 
 <%= f.simple_fields_for :popular_sentence do |f2| %>
   <%= render "sentences/fields", f:f2, placeholder:f.object.placeholder %>

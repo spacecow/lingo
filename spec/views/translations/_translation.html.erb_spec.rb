@@ -19,13 +19,15 @@ describe 'translations/translation.html.erb' do
   context "member logged in" do
     before do
       controller.stub(:current_user){ create(:user) }
+      create(:japanese, translation:translation)
       render translation
     end
+
+    it{ should_not have_selector 'div#languages' }
 
     describe 'div.translation' do
       subject{ Capybara.string(rendered).find('div.translation')}
       it{ should have_selector "form#edit_translation_#{translation.id}" }
-      it{ should_not have_selector 'div#languages' }
     end
-  end
+  end #member logged in
 end

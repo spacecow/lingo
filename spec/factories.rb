@@ -14,12 +14,17 @@ FactoryGirl.define do
     translation
   end
 
-  factory :notification do
-    association :notifiable, factory: :sentence
-    association :creator, factory: :user
-    type_mask 1 
-    content 'Factory content'
-  end
+  #factory :noticement do
+  #  user
+  #  notification
+  #end
+
+  #factory :notification do
+  #  association :notifiable, factory: :sentence
+  #  association :creator, factory: :user
+  #  type_mask 1 
+  #  content 'Factory content'
+  #end
 
   factory :page do
     no 1

@@ -29,7 +29,7 @@ describe 'Pages show, updates translation' do
     lambda do click_button 'Update Translation'
     end.should change(Sentence,:count).by(1)
   end
-  it "saves create/update notification to db", focus:true do
+  it "saves create/update notification to db" do
     lambda do click_button 'Update Translation'
     end.should change(Notification,:count).by(2)
   end
@@ -38,8 +38,7 @@ describe 'Pages show, updates translation' do
     before{ click_button 'Update Translation' }
     let(:_translation){ Translation.last }
 
-    context 'translation', focus:true do
-      it do p Notification.count; p Notification.all end
+    context 'translation' do
       subject(:translation){ _translation }
       its(:page_id){ should eq _page.id }
     end

@@ -13,3 +13,5 @@ e9cb53: !ruby/object:Dooby::Task
   todo: edit for comment :done
 9cf1fd: !ruby/object:Dooby::Task 
   todo: add notification service :done
+392dde: !ruby/object:Dooby::Task 
+  todo: sentence update notification :done

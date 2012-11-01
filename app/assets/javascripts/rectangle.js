@@ -3,13 +3,30 @@ var active_form_id = false;
 
 $(function(){
   var active_textarea_id;
+  var history_id;
 
-  /* Unobtrusive javacode */
+  /* If active_id is set in the url values are
+  ** saved for the textarea and history to be
+  ** active after everything is turned off. */
+  if ($('textarea.active').attr('id')) {
+    active_textarea_id = $('textarea.active').attr('id')
+    active_form_id = $('textarea.active').parent().parent().attr('id')
+    history_id = $('textarea.active').data('history');
+  }
+
+  /* Unobtrusive javacode (everything turned off)*/
   $('form#new_translation').hide()
   $("input.submit").hide();
   $('div#page a#new_link').show()
   $('div.history').hide()
   $('a#comment').hide()
+
+  /* Active textarea/history is turned on since
+  ** active_id is set in the url */
+  if (active_form_id){
+    activate_textarea()
+    activate_history(history_id)
+  }
 
   /* Initially we are in read mode, so the
   ** rectangle is set not to be moved or resized.
@@ -55,26 +72,10 @@ $(function(){
   /* The textarea that got clicked is activated
   ** and its button is shown. */
     $(active_form()+" textarea#"+active_textarea_id).addClass("active");
-    $(active_form()+" input.submit").show();
-    $(active_form()+" div.button_placeholder").hide();
+    activate_textarea()
 
-  /* The history is shown, if there is more
-  ** than one version for the transcribe/
-  ** translation. If there is just one, but it
-  ** has a comment, the history is also shown.
-  ** Otherwise, the comment link is presented
-  ** giving the user the opportunity to force
-  ** showing the history section where he can
-  ** create a comment. */
     var history_id = $(this).data('history');
-    active_form_id = $(this).parent().parent().get(0).id;
-    if ($("div#"+history_id+" div#sentences").children('div.sentence').length > 1){
-      $("div#"+history_id).show();
-    }else if ($("div#"+history_id+" div#sentences").children('div.sentence').length == 1 && $("div#"+history_id+" div#sentences").children('div.sentence').children('div#comments').length == 1){
-      $("div#"+history_id).show();
-    }else{
-      $("form#"+active_form_id+" a#comment").show();
-    }
+    activate_history(history_id)
 
   /* The rectangle is also forced to move
   ** (in case we are in edit mode). After the
@@ -93,6 +94,28 @@ $(function(){
   });
 });
 
+function activate_textarea(){
+  $(active_form()+" input.submit").show();
+  $(active_form()+" div.button_placeholder").hide();
+}
+
+/* The history is shown, if there is more
+** than one version for the transcribe/
+** translation. If there is just one, but it
+** has a comment, the history is also shown.
+** Otherwise, the comment link is presented
+** giving the user the opportunity to force
+** showing the history section where he can
+** create a comment. */
+function activate_history(id){
+  if ($("div#"+id+" div#sentences").children('div.sentence').length > 1){
+    $("div#"+id).show();
+  }else if ($("div#"+id+" div#sentences").children('div.sentence').length == 1 && $("div#"+id+" div#sentences").children('div.sentence').children('div#comments').length == 1){
+    $("div#"+id).show();
+  }else{
+    $("form#"+active_form_id+" a#comment").show();
+  }
+}
 
 function active_form(){
   return "form#"+active_form_id

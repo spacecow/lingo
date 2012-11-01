@@ -12,6 +12,7 @@ class Ability
       can [:new,:create,:update], Translation
       can [:show,:update], Sentence
       can [:show,:create], Comment
+      can :show, Noticement
     end
   end
 end

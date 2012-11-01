@@ -8,13 +8,13 @@ class Comment < ActiveRecord::Base
   validates :user, presence:true
   validates :content, presence:true
 
-  after_save :create_notification
+  before_create :create_notification
 
   def userid; user.username end
 
   private
 
     def create_notification
-      Notification.notice_from!(self,self.user)
+      Notification.notice_from!(self,self.user,:create)
     end
 end

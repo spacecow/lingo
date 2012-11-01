@@ -10,10 +10,13 @@ class Sentence < ActiveRecord::Base
   validates :language_id, uniqueness:{scope: :user_id}
   validates :language, presence:true
 
-  after_create :create_notification
-  after_update :update_notification
+  before_create :create_notification
+  before_update :update_notification
 
   def comments_present?; comments.present? end
+  def klass(active_id)
+    active_id == self.id ? 'active' : ''
+  end
   def page; language.page end
   def project; language.project end
   def set_initial_user(user) self.user = user end
@@ -24,6 +27,10 @@ class Sentence < ActiveRecord::Base
   private
 
     def create_notification
-      Notification.notice_from!(self,self.user)
+      Notification.notice_from!(self,self.user,:create)
+    end
+
+    def update_notification
+      Notification.notice_from!(self,self.user,:update)
     end
 end

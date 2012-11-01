@@ -2,6 +2,18 @@ require 'spec_helper'
 
 describe 'Pages show, layout' do
   let(:_page){ create(:page) }
+  let(:translation){ create(:translation, page:_page)}
+  let(:language){ create(:japanese, translation:translation)}
+  let(:sentence){ create(:sentence, language:language)}
+  it "" do
+    signin
+    visit project_page_path(_page.project, _page, active_id:sentence.id)
+    page.should have_selector "textarea.active"
+  end
+end
+
+describe 'Pages show, layout' do
+  let(:_page){ create(:page) }
 
   context "member logged in" do
     before{ signin }

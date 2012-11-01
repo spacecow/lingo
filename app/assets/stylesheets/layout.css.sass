@@ -17,6 +17,20 @@ a
     color: #eee
     text-shadow: 1px 1px 1px $blue 
 
+$small_font: 10px
+div.content
+  float: left
+div.type
+  float: left
+  margin-right: 5px
+div.timestamp
+  float: left
+  margin-right: 5px
+  font-size: $small_font
+div.author
+  float: left
+  font-size: $small_font
+
 div#background
   background: black
 
@@ -52,6 +66,8 @@ div#page
       padding-left: 10px
   div#image_container
     float: left
+  div#noticements_container
+    float: left
   div#translations_container
     float: left
     div#translations
@@ -76,6 +92,9 @@ div#page
               margin-left: 5px
               background: #eee
               padding: 2px
+              border-top: 1px dashed black
+              &:first-child
+                border-top: 0
               div#content
                 font-size: 12px
           form#new_comment

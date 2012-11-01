@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   has_many :sentences
   has_many :comments
 
+  has_many :noticements
+  has_many :notifications, through: :noticements
+
   attr_accessible :email, :name, :oauth_expires_at, :oauth_token, :provider, :uid, :username
 
   ADMIN     = 'admin'

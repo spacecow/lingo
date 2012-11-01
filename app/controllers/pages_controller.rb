@@ -10,6 +10,7 @@ class PagesController < ApplicationController
     @translation.languages.last.popular_sentence = Sentence.new
     @translation.languages << English.new
     @translation.languages.last.popular_sentence = Sentence.new
+    @active_id = params[:active_id].to_i
   end
 
   def new
