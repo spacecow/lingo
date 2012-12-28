@@ -1,14 +1,22 @@
 require 'spec_helper'
 
-describe 'Pages show, layout' do
+describe 'Pages show, layout', focus:true do
   let(:_page){ create(:page) }
   let(:translation){ create(:translation, page:_page)}
   let(:language){ create(:japanese, translation:translation)}
-  let(:sentence){ create(:sentence, language:language)}
-  it "" do
+  let(:sentence){ create(:sentence, language:language, content:'new sentence')}
+  before do
     signin
     visit project_page_path(_page.project, _page, active_id:sentence.id)
+  end
+
+  it "" do
     page.should have_selector "textarea.active"
+  end
+
+  context "read a noticement" do
+    before{ find('div.noticement').click_link 'new sentence' }
+    it{ page.should have_selector 'div.noticement.read' } 
   end
 end
 

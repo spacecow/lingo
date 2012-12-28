@@ -13,6 +13,7 @@ class Ability
       can [:show,:update], Sentence
       can [:show,:create], Comment
       can :show, Noticement
+      can :edit, Noticement, user_id:user.id
     end
   end
 end

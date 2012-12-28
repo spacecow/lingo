@@ -29,7 +29,7 @@ describe 'Pages show, updates translation' do
     lambda do click_button 'Update Translation'
     end.should change(Sentence,:count).by(1)
   end
-  it "saves create/update notification to db" do
+  it "saves create/update notification to db", focus:true do
     lambda do click_button 'Update Translation'
     end.should change(Notification,:count).by(2)
   end

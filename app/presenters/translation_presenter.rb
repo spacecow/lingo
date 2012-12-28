@@ -29,11 +29,7 @@ class TranslationPresenter < BasePresenter
 
   def noticements(user)
     h.content_tag(:div, class:'noticements') do
-      user.noticements.map{|noticement|
-        h.content_tag(:div, class:'noticement') do
-          h.render noticement
-        end
-      }.join.html_safe
+      h.render user.noticements
     end if h.can?(:show, Noticement) && user.noticements.present?
   end
 end

@@ -1,8 +1,12 @@
 <% present noticement do |presenter| %>
+
+<div class="<%= noticement.klass %>">
   <%= presenter.type %>
   <%= presenter.content %>
   <div class="clear"></div>
   <%= presenter.timestamp %>
   <%= presenter.by_author %>
   <div class="clear"></div>
+</div>
+
 <% end %>

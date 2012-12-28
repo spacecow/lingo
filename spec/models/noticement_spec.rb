@@ -14,8 +14,8 @@ describe Noticement do
     end
     it do end
     subject{ Noticement.last }
+    it{ should be_unread }
     its(:notification_id){ should be Notification.last.id }
     its(:user_id){ should be user.id }
-    its(:active){ should be true }
   end
 end

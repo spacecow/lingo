@@ -8,6 +8,9 @@ class Noticement < ActiveRecord::Base
   def content; notification.content end
   def creator; notification.creator end
   def creator_name; notification.creator_name end
+  def klass
+    "noticement #{unread ? 'unread' : 'read'}"
+  end
   def notification_updated_at; notification.updated_at end
   def page; notification.page end
   def project; notification.project end

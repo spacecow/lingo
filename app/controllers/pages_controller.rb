@@ -11,6 +11,11 @@ class PagesController < ApplicationController
     @translation.languages << English.new
     @translation.languages.last.popular_sentence = Sentence.new
     @active_id = params[:active_id].to_i
+    if params[:read_id]
+      noticement = Noticement.find(params[:read_id])
+      noticement.unread = false
+      noticement.save if can? :edit, noticement
+    end
   end
 
   def new

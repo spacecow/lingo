@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20121026071825) do
   create_table "noticements", :force => true do |t|
     t.integer  "user_id"
     t.integer  "notification_id"
-    t.boolean  "active",          :default => true
+    t.boolean  "unread",          :default => true
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
   end

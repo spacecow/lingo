@@ -8,7 +8,7 @@ class NoticementPresenter < BasePresenter
   end
   def content
     h.content_tag(:div, class:'content') do
-      h.link_to(noticement.content,h.project_page_path(noticement.project,noticement.page, active_id:noticement.sentence_id))
+      h.link_to(noticement.content,h.project_page_path(noticement.project,noticement.page, active_id:noticement.sentence_id, read_id:noticement.id))
     end
   end
   def type
