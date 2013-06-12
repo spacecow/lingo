@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'noticements/_noticement.html.erb', focus:true do
+describe 'noticements/_noticement.html.erb' do
   let(:user){ create(:user, username:'Batman')}
   before do
     create(:user) #needs another user so that a noticement is created

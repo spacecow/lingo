@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.7'
+gem 'rails', '3.2.13'
 gem 'mysql2'
 gem 'jquery-rails'
 gem 'simple_form'
@@ -24,7 +24,7 @@ end
 
 group :test do
   gem 'its'
-  gem 'rb-inotify', '~> 0.8.8'
+  gem 'rb-inotify', '~> 0.9'
   gem 'fuubar'
   gem 'spork-rails' #, '> 0.9.0.rc'
   gem 'guard'

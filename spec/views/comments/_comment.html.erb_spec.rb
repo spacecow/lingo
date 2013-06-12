@@ -7,6 +7,6 @@ describe 'comments/comment.html.erb' do
 
   subject{ Capybara.string(rendered)}
   it{ should have_selector 'div#content', text:'Oh yeah' }
-  it{ should have_selector 'div#timestamp', text:'about 1 hour ago' }
+  it{ should have_selector 'div.timestamp', text:'about 1 hour ago' }
   it{ should have_selector 'div#author', text:'by Batman' }
 end 

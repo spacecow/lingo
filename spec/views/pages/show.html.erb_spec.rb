@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe 'pages/show.html.erb' do
-  let(:translation){ create(:translation)}
+  let(:translation){ stub_model Translation }
+  let(:project){ mock_model Project, title:'Joe' }
+  let(:page){ stub_model Page }
   before do
     assign(:translation, translation)
-    assign(:page, translation.page)
-    assign(:project, translation.project)
+    assign(:page, page)
+    assign(:project, project)
   end
 
   context 'no user logged in' do

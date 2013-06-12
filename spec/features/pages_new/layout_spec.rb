@@ -8,7 +8,7 @@ describe 'Pages new, layout' do
   end
 
   it "has a title" do
-    page.should have_title('New Page for Ashita no Joe')
+    page.should have_selector('h1', text:'New Page for Ashita no Joe')
   end
 
   it "has a new page form" do

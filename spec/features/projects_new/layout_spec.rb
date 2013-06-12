@@ -7,7 +7,7 @@ describe 'Projects new, layout' do
   end
 
   it "has a title" do
-    page.should have_title('New Project')
+    page.should have_selector 'h1', text:'New Project'
   end
 
   it "has a new project form" do

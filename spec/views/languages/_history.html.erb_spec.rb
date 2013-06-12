@@ -72,7 +72,7 @@ describe 'languages/history.html.erb' do
         it{ should have_selector 'div.sentence', count:2 }
 
         describe "div.sentence" do
-          subject{ Capybara.string(rendered).find('div#sentences div.sentence')}
+          subject{ Capybara.string(rendered).first('div#sentences div.sentence')}
           it{ should have_content 'oh yeah' }
           it{ should have_selector 'form#new_comment' }
         end

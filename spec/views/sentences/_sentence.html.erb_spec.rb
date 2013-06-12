@@ -35,9 +35,9 @@ describe 'sentences/sentence.html.erb' do
     context "without comments" do
       before{ render sentence, comment:Comment.new }
 
-      subject{ Capybara.string(rendered) } 
+      subject{ Capybara.string(rendered) }
       it{ should have_selector 'div#content', text:'bajs' }
-      it{ should have_selector 'div#timestamp', text:'about 1 hour ago' }
+      it{ should have_selector 'div.timestamp', text:'about 1 hour ago' }
       it{ should have_selector 'div#author', text:'by Batman' }
       it{ should have_link 'Batman', href:user_path(user) }
       it{ should_not have_selector 'div#comments' }

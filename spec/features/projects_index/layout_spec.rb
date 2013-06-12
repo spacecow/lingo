@@ -8,7 +8,7 @@ describe 'Projects index, layout' do
       end
 
       it "has a title" do
-        page.should have_title('Projects')
+        page.should have_selector 'h1', text:'Projects'
       end
 
       it "has no div for the projects" do

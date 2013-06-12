@@ -13,8 +13,10 @@ describe 'Pages show, updates translation' do
     english = create(:english, translation:translation)
     create(:sentence, user:@second_user, language:english, content:'english') 
     visit project_page_path(_page.project, _page)
-    fill_in 'translation_languages_attributes_0_popular_sentence_attributes_content', with:'nihongo'
-    fill_in 'translation_languages_attributes_1_popular_sentence_attributes_content', with:'japanese'
+    first(:field,'translation_languages_attributes_0_popular_sentence_attributes_content').set 'nihongo'
+    first(:field,'translation_languages_attributes_1_popular_sentence_attributes_content').set 'japanese'
+    #fill_in 'translation_languages_attributes_0_popular_sentence_attributes_content', with:'nihongo'
+    #fill_in 'translation_languages_attributes_1_popular_sentence_attributes_content', with:'japanese'
   end
 
   it "saves the translation to db" do
@@ -29,7 +31,7 @@ describe 'Pages show, updates translation' do
     lambda do click_button 'Update Translation'
     end.should change(Sentence,:count).by(1)
   end
-  it "saves create/update notification to db", focus:true do
+  it "saves create/update notification to db" do
     lambda do click_button 'Update Translation'
     end.should change(Notification,:count).by(2)
   end
@@ -88,8 +90,8 @@ describe 'Pages show, updates translation' do
 
   context "blank update" do
     before do
-      fill_in 'translation_languages_attributes_0_popular_sentence_attributes_content', with:''
-      fill_in 'translation_languages_attributes_1_popular_sentence_attributes_content', with:''
+      first(:field,'translation_languages_attributes_0_popular_sentence_attributes_content').set ''
+      first(:field,'translation_languages_attributes_1_popular_sentence_attributes_content').set ''
     end
 
     it "saves the translation to db" do

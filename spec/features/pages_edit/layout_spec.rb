@@ -9,7 +9,7 @@ describe 'Pages edit, layout' do
   end
 
   it "has a title" do
-    page.should have_title('Edit Page for Ashita no Joe')
+    page.should have_selector 'h1', text:'Edit Page for Ashita no Joe'
   end
 
   it "has a edit page form" do

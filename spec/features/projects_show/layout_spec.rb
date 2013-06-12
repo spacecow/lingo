@@ -12,7 +12,7 @@ describe 'Projects show, layout' do
       end
 
       it "has the project as the title" do
-        page.should have_title(@project.title)
+        page.should have_selector 'h1', text:@project.title
       end
 
       it "has no div with pages" do
