@@ -4,6 +4,7 @@
 /log/*.sql
 /tmp
 /config/database.yml
+/config/database_mysql.yml
 /config/application.yml
 *.swp
 *.swo

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.0.rc2'
-gem 'mysql2'
+gem 'pg'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'rmagick'

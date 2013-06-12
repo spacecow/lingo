@@ -9,77 +9,77 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121026071825) do
+ActiveRecord::Schema.define(version: 20121026071825) do
 
-  create_table "comments", :force => true do |t|
+  create_table "comments", force: true do |t|
     t.text     "content"
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.integer  "user_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "languages", :force => true do |t|
+  create_table "languages", force: true do |t|
     t.integer  "translation_id"
     t.string   "type"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "noticements", :force => true do |t|
+  create_table "noticements", force: true do |t|
     t.integer  "user_id"
     t.integer  "notification_id"
-    t.boolean  "unread",          :default => true
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.boolean  "unread",          default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "notifications", :force => true do |t|
+  create_table "notifications", force: true do |t|
     t.integer  "notifiable_id"
     t.string   "notifiable_type"
     t.integer  "creator_id"
     t.integer  "type_mask"
     t.string   "content"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "pages", :force => true do |t|
+  create_table "pages", force: true do |t|
     t.integer  "no"
     t.integer  "project_id"
     t.string   "image"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "projects", :force => true do |t|
+  create_table "projects", force: true do |t|
     t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "sentences", :force => true do |t|
+  create_table "sentences", force: true do |t|
     t.string   "content"
     t.integer  "language_id"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "translations", :force => true do |t|
+  create_table "translations", force: true do |t|
     t.integer  "page_id"
     t.integer  "x1"
     t.integer  "y1"
     t.integer  "x2"
     t.integer  "y2"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "users", :force => true do |t|
+  create_table "users", force: true do |t|
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(:version => 20121026071825) do
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
     t.integer  "roles_mask"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
