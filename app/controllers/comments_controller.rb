@@ -10,4 +10,10 @@ class CommentsController < ApplicationController
       redirect_to [@sentence.project, @sentence.page], alert:'Comment cannot be blank'
     end
   end
+
+  private
+
+    def comment_params
+      params.require(:comment).permit(:fuck)
+    end
 end

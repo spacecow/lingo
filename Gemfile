@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.0.rc2'
 gem 'mysql2'
 gem 'jquery-rails'
 gem 'simple_form'
@@ -9,24 +9,27 @@ gem 'carrierwave'
 gem 'cancan'
 gem 'omniauth-facebook'
 
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-  gem 'compass-rails'
-  gem 'therubyracer', :platforms => :ruby
-end
+gem 'sass-rails',   '~> 4.0.0.rc2'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.3.0'
+gem "compass-rails", git: "http://github.com/milgner/compass-rails", ref: "1749c06f15dc4b058427e7969810457213647fb8"
+gem 'therubyracer', :platforms => :ruby
 
 group :development do
   gem 'rspec-rails'
   gem 'guard-spork'
 end
 
+gem 'protected_attributes'
+gem 'rails-observers'
+gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
+
 group :test do
   gem 'its'
   gem 'rb-inotify', '~> 0.9'
   gem 'fuubar'
-  gem 'spork-rails' #, '> 0.9.0.rc'
+  gem 'spork-rails', git:'https://github.com/railstutorial/spork-rails'
   gem 'guard'
   gem 'guard-rspec'
   gem 'factory_girl_rails' #, '1.2.0'

@@ -48,9 +48,10 @@ describe 'Pages show, layout' do
         it "displays sentences if there are more than 1" do
           div(:history,0).divs_no(:sentence).should be 2 
         end
-        it "displays comments form if there are more than 1" do
-          div(:history,0).forms_no(:new_comment).should be 2 
-        end
+        it "displays comments form if there are more than 1" 
+        #it "displays comments form if there are more than 1" do
+        #  div(:history,0).forms_no(:new_comment).should be 2 
+        #end
         it "displays none if there is just one" do
           #form.should_not have_selector 'div.history'
           #div(:history,1).divs_no(:sentence).should be 0 
