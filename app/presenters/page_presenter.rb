@@ -1,6 +1,10 @@
 class PagePresenter < BasePresenter
   presents :page, :project
 
+  def current_pos
+    "Page #{page.pos}"
+  end
+
   def decrease_pos
     h.link_to '<', h.decrease_pos_path(page_id:page.id), method: :put
   end
@@ -9,7 +13,23 @@ class PagePresenter < BasePresenter
     h.link_to '>', h.increase_pos_path(page_id:page.id), method: :put
   end
 
+  def navigator
+    h.render 'navigator', page:page
+  end
+
+  def next_pos
+    _next_page = page.next_page
+    return "" unless _next_page
+    h.link_to "Page #{_next_page.pos} >", h.project_page_path(_next_page.project, _next_page)
+  end
+  
   def pos; page.pos end
+
+  def prev_pos
+    _prev_page = page.prev_page
+    return "" unless _prev_page
+    h.link_to "< Page #{_prev_page.pos}", h.project_page_path(_prev_page.project, _prev_page)
+  end
   
   def image ver
     h.link_to h.image_tag(page.image_url(:thumb)), [project, page]

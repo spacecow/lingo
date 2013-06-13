@@ -1,10 +1,11 @@
 <% present [@translation,@page,@project] do |translation_presenter| %>
 <% present [@page,@project] do |page_presenter| %>
 
-<div id="page">
+<div class="page">
   <div id="title">
     <%= title @project.title %>
-    <%= subtitle "Page #{@page.no}" %>
+    <%= page_presenter.navigator %>
+    <%# subtitle "Page #{@page.pos}" %>
     <%= page_presenter.edit_link %>
   </div>
 

@@ -1,0 +1,11 @@
+<% present page do |presenter| %>
+
+<nav role="navigation" class="subtitle">
+  <ul>
+    <li><%= presenter.prev_pos %></li>
+    <li class="selected"><%= presenter.current_pos %></li>
+    <li><%= presenter.next_pos %></li>
+  </ul>
+</nav>
+
+<% end %>

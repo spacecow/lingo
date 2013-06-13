@@ -36,4 +36,38 @@ describe Page do
       page.pos.should eq 101
     end
   end
+
+  describe "next_page," do
+    let(:page){ create :page, pos:1 }
+    context "there is no next page" do
+      it "returns nil" do
+        page.next_page.should be_nil 
+      end
+    end
+
+    context "there is a next page," do
+      let!(:next_page){ create :page, pos:4, project_id:page.project_id }
+
+      it "returns that page" do
+        page.next_page.should eq next_page 
+      end
+    end 
+  end
+
+  describe "prev_page," do
+    let(:page){ create :page, pos:1 }
+    context "there is no previous page" do
+      it "returns nil" do
+        page.prev_page.should be_nil 
+      end
+    end
+
+    context "there is a previous page," do
+      let!(:prev_page){ create :page, pos:0, project_id:page.project_id }
+
+      it "returns that page" do
+        page.prev_page.should eq prev_page
+      end
+    end 
+  end
 end
