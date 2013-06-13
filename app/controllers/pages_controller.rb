@@ -26,6 +26,10 @@ class PagesController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @page = @project.pages.build(params[:page])
+
+    @page.set_pos
+    @page.increase_pos while Page.exists?(pos:@page.pos,project_id:@project.id)
+
     if @page.save
       redirect_to @project, notice:created(:page)
     else

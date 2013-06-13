@@ -1,4 +1,4 @@
-<div id="pages">
-  <%= render pages, project:project %>
+<div class="pages">
+  <%= render pages.sort_by(&:pos), project:project %>
   <div class="clear"></div>
 </div>

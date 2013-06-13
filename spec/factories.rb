@@ -28,6 +28,7 @@ FactoryGirl.define do
 
   factory :page do
     no 1
+    pos 1
     project
   end
 

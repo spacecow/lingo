@@ -7,7 +7,7 @@ describe Noticement do
   describe "create" do
     let!(:user){ create(:user)} #add one more user so that a noticement will be created 
     before do
-      create(:sentence)
+      create :sentence
       assert_equal(User.count,2)
       assert_equal(Notification.count,1)
       assert_equal(Noticement.count,1)

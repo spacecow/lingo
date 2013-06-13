@@ -4,7 +4,8 @@ Lingo::Application.routes.draw do
   resources :users, :only => :show
 
   resources :projects, :only => [:show,:index,:new,:create] do
-    resources :pages, :only => [:show,:new,:create,:edit,:update]
+    resources :pages, :only => [:show,:new,:create,:edit,:update] do
+    end
   end
   resources :translations, :only => [:new,:create,:update]
 
@@ -15,4 +16,7 @@ Lingo::Application.routes.draw do
 
   get 'welcome' => 'projects#index'
   root :to => 'projects#index'
+
+  put 'decrease_pos' => 'pos#decrease' 
+  put 'increase_pos' => 'pos#increase' 
 end

@@ -1,4 +1,12 @@
-<div class="thumb">
-  <%= link_to image_tag(page.image_url(:thumb)), [project, page] %>
-  <div id="no"><%= page.no %></div>
+<% present [page,page.project] do |presenter| %>
+
+<div class="page thumb">
+  <%= presenter.image :thumb %>
+  <div id="no">
+    <%= presenter.decrease_pos %>
+    <%= presenter.pos %>
+    <%= presenter.increase_pos %>
+  </div>
 </div>
+
+<% end %>
