@@ -15,7 +15,8 @@ gem 'uglifier', '>= 1.3.0'
 gem "compass-rails", git: "http://github.com/milgner/compass-rails", ref: "1749c06f15dc4b058427e7969810457213647fb8"
 gem 'therubyracer', :platforms => :ruby
 gem 'unicorn'
-gem 'rb-readline', '~> 0.4.2'
+#gem 'rb-readline', '~> 0.4.2'
+gem 'rb-readline', '~> 0.5.0'
 
 group :development do
   gem 'rspec-rails'

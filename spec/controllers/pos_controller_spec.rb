@@ -25,22 +25,33 @@ describe PosController do
     end
   end 
 
-  describe "increase" do
+  describe "increase", focus:true do
     let(:project){ create :project }
-    let(:page){ create :page, pos:100, project_id:project.id }
-    context "no page in the project immediately after" do
+
+    context "project is empty" do
+    end
+
+    context "no page after" do
+      let(:page){ create :page, pos:100, project_id:project.id }
       it "page increases with 1" do
         put :increase, page_id:page.id
         Page.last.pos.should eq 101
       end
     end  
 
-    context "a page in the project immediately after" do
+    context "a page after" do
+      let(:page){ create :page, id:1, pos:100, project_id:project.id, next_id:2 }
+      let!(:page_after){ create :page, id:2, pos:101, project_id:project.id, prev_id:1 }
+
       it "pages switches pos" do
-        page_after = create :page, pos:101, project_id:project.id
         put :increase, page_id:page.id
         Page.find(page.id).pos.should eq 101
         Page.find(page_after.id).pos.should eq 100
+      end
+
+      it "" do
+        put :increase, page_id:page.id
+        p Page.all
       end
     end
   end 

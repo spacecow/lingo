@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    if @project.save 
+    if @project.save
       redirect_to projects_path, notice:created(:project)
     else
       render :new

@@ -28,7 +28,7 @@ FactoryGirl.define do
 
   factory :page do
     no 1
-    pos 1
+    sequence(:pos){|n| n}
     project
   end
 

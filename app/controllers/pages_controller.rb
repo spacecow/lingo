@@ -31,6 +31,18 @@ class PagesController < ApplicationController
     @page.increase_pos while Page.exists?(pos:@page.pos,project_id:@project.id)
 
     if @page.save
+
+      if @project.first_page.nil?
+        @project.first_page = @page 
+      else
+        @project.last_page.next = @page
+        @page.prev = @project.last_page
+        @page.prev.save
+        @page.save
+      end
+      @project.last_page = @page
+      @project.save
+
       redirect_to @project, notice:created(:page)
     else
       render :new
