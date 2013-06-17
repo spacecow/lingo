@@ -21,16 +21,11 @@ class Page < ActiveRecord::Base
   end
 
   def next_page
-    _pages = project.pages.order("pos")
-    _next_page = _pages.index(self) + 1
-    _pages[_next_page]
+    self.next
   end
 
   def prev_page
-    _pages = project.pages.order("pos")
-    _prev_page =_pages.index(self) - 1
-    return nil if _prev_page < 0
-    _pages[_prev_page]
+    self.prev
   end
 
   def set_pos

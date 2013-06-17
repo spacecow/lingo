@@ -33,9 +33,6 @@ describe 'Projects show, layout' do
       it "has a div with pages" do
         page.should have_selector('div.pages')
       end
-      it "has a div for each page" do
-        find('div.pages').divs_no(:thumb).should be 1
-      end
     end
   end
 

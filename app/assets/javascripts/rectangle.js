@@ -17,7 +17,7 @@ $(function(){
   /* Unobtrusive javacode (everything turned off)*/
   $('form#new_translation').hide()
   $("input.submit").hide();
-  $('div#page a#new_link').show()
+  $('div.page a#new_link').show()
   $('div.history').hide()
   $('a#comment').hide()
 

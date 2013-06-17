@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def show
     @project = Project.find(params[:project_id])
-    @page = @project.pages.find(params[:id])
+    @page = @project.pages.includes(:prev,:next).find(params[:id])
     @translations = @page.translations
     @translation = Translation.new(x1:100, y1:100, x2:400, y2:400)
     @translation.languages << Japanese.new

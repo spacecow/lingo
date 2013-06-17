@@ -38,34 +38,40 @@ describe Page do
   end
 
   describe "next_page," do
-    let(:page){ create :page, pos:1 }
+    let(:project){ create :project }
+    let(:page){ create :page, project_id:project.id }
     context "there is no next page" do
       it "returns nil" do
+        page.should_receive(:next).and_return nil 
         page.next_page.should be_nil 
       end
     end
 
     context "there is a next page," do
-      let!(:next_page){ create :page, pos:4, project_id:page.project_id }
+      let!(:next_page){ create :page, project_id:project.id }
 
       it "returns that page" do
+        page.should_receive(:next).and_return next_page
         page.next_page.should eq next_page 
       end
     end 
   end
 
   describe "prev_page," do
-    let(:page){ create :page, pos:1 }
+    let(:project){ create :project }
+    let(:page){ create :page, project_id:project.id }
     context "there is no previous page" do
       it "returns nil" do
+        page.should_receive(:prev).and_return nil 
         page.prev_page.should be_nil 
       end
     end
 
     context "there is a previous page," do
-      let!(:prev_page){ create :page, pos:0, project_id:page.project_id }
+      let!(:prev_page){ create :page, project_id:project.id }
 
       it "returns that page" do
+        page.should_receive(:prev).and_return prev_page
         page.prev_page.should eq prev_page
       end
     end 
